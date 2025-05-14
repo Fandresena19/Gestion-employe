@@ -1,0 +1,187 @@
+*{
+    font-family: birds_of_paradise sans-serif;
+    font-size: 16px;
+}
+
+body{
+    background-color: var(--bg-main);
+    min-height: 100vh;
+    display: flex;
+
+    max-width: 100%;
+    margin: auto !important;
+    border-radius: 20px !important;
+    /* border: 1px solid blue; */
+    background-color: #1B0E20 !important;
+    opacity: 100%;
+}
+
+.container-fluid{
+    display: flex;
+    width: 70%;
+    max-width: 80%;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+:root{
+    --bg-main: #1B0E20;
+    --second-bg: #1B0C20;
+    --bouton : #C4BCBC;
+}
+
+#error{
+    background: #F2DEDE !important;
+    color: #A94442 !important;
+    padding: 10px !important;
+    width: 98% !important;
+    border-radius: 5px !important;
+    margin: 20px auto !important;
+    text-align: center;
+}
+
+/* CONTENU ENTREPRISE */
+.contenu-entreprise{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
+    background-color: var(--second-bg);
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+}
+
+.contenu-entreprise h3{
+    color: white;
+    text-align: center;
+    margin-top: 5%;
+    font-family: Maiandra GD !important;
+}
+
+.contenu-entreprise h3 span{
+    font-family: Maiandra GD !important;
+    font-size: 40px;
+    color: white;
+}
+
+.contenu-entreprise img{
+    max-width: 300px;
+    height: auto;
+    margin-bottom: 20px;
+    display: block;
+}
+
+
+/* CONTENU LOGIN */
+#Contenu_login{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    width: 80% ;
+    margin: auto;
+    padding: 5% 5% 10% 5%;
+    background-color: rgb(243, 243, 218) !important;
+    border-radius: 5%;
+    box-shadow: 0px 0px 10px 1px #222222;
+}
+
+#Forme{
+    margin: 5% 0px;
+}
+
+#login_btn{
+    display: flex;
+    justify-content: end;
+    margin-top: 5%;
+    color: white !important;
+}
+
+#login_btn button{
+    width: 90%;
+    margin: auto;
+    background-color: var(--bouton) !important;
+    color: black !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    border-radius: 10px !important;
+    border: 2px solid gray !important;
+    padding: 8px 10px;
+}
+
+#login_btn button:hover{
+    font-weight: bold !important;
+    font-size: 20px !important;
+    background-color:var(--second-bg) !important;
+    color: white !important;
+    box-shadow: 5px 5px 20px 2px !important;
+}
+
+#show span{
+    display: flex;
+    position:relative;
+}
+
+#show input:focus{
+    outline: none;
+}
+
+#show span i{
+    position: absolute;
+    top: 20%;
+    right: 5%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: rgb(93, 94 , 95);
+}
+
+#show input span i{
+    color: rgb(162, 163, 163);
+}
+
+@media screen and (max-width: 1010px){
+    .container-fluid {
+        width: 90%;
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container-fluid {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .contenu-entreprise, #Contenu_login {
+        padding: 20px;
+        width: 100%;
+    }
+
+    .contenu-entreprise img {
+        max-width: 200px;
+    }
+}
+
+@media screen and (max-width: 480px){
+    .container-fluid {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+    }
+
+    #Contenu_login form {
+        padding: 10px;
+    }
+
+    .form-control {
+        font-size: 14px;
+    }
+
+    #login_btn button {
+        font-size: 16px;
+    }
+}

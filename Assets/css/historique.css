@@ -1,0 +1,66 @@
+:root{
+    /* Couleur */
+    --bg-nav: #1B0C20;
+    --bg-body: #1B0E20;
+    --body-second-bg: #6a6363bf;
+    --bouton-hover : #C4BCBC;
+    --active: #6A2C82;
+    --text-color: #e0e0e0ce;
+    --menu-color: #14041ae6;
+
+    /* transition */
+    --trans-02: all 0.2s ease;
+    --trans-03: all 0.3s ease;
+    --trans-04: all 0.4s ease;
+    --trans-05: all 0.5s ease;
+}
+
+.dashboard{
+    padding: 20px 70px 10px 70px;
+    font-size: 12px;
+}
+
+.contenu{
+    background-color: var(--body-second-bg);
+    padding: 10px 20px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contenu header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 95%;
+    height: 60px;
+    margin: auto;
+    padding: 10px 20px;
+    background-color: var(--active);
+    border-radius: 10px;
+    justify-content: center;
+}
+
+table{
+    width: 100%;
+    font-size: 15px;
+}
+table thead td{
+    text-align: center;
+}
+
+table td, table th{
+    border:3px solid var(--body-second-bg);
+    text-align: center;
+    padding: 8px;
+    border-radius: 5px;
+}
+
+tr:nth-child(even){
+    background-color: #919090;
+}
+tr:hover{
+    background-color: var(--bouton-hover);
+}

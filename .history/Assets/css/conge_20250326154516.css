@@ -1,0 +1,283 @@
+:root {
+    /* Couleur */
+    --bg-nav: #1B0C20;
+    --bg-body: #1B0E20;
+    --body-second-bg: #6a6363bf;
+    --bouton-hover: #C4BCBC;
+    --active: #6A2C82;
+    --text-color: #e0e0e0ce;
+    --menu-color: #14041ae6;
+
+    /* transition */
+    --trans-02: all 0.2s ease;
+    --trans-03: all 0.3s ease;
+    --trans-04: all 0.4s ease;
+    --trans-05: all 0.5s ease;
+}
+
+.dashboard {
+    padding: 20px 70px 10px 70px;
+    font-size: 12px;
+}
+
+.contenu {
+    background-color: var(--body-second-bg);
+    padding: 10px 20px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.contenu header {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 95%;
+    height: 60px;
+    margin: auto;
+    padding: 10px 20px;
+    background-color: var(--active);
+    border-radius: 10px;
+}
+
+.contenu header h4 {
+    font-size: 20px;
+    position: absolute;
+    top: 20px;
+}
+
+.contenu header .bouton {
+    position: absolute;
+    top: 28%;
+    right: 5%;
+}
+
+.contenu header .bouton a {
+    margin-left: 10px;
+    text-decoration: none;
+}
+
+.contenu header .bouton a button {
+    width: 200px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 10px;
+    border: none;
+}
+
+.contenu header .bouton a button:hover {
+    border: 2px solid white;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse !important;
+    margin-bottom: 40px;
+}
+
+table thead tr td {
+    text-align: center;
+}
+
+td,
+th {
+    padding: 8px;
+    text-align: left;
+    border: 3px solid var(--body-second-bg);
+    border-radius: 5px;
+}
+
+tbody tr:nth-child(even):hover {
+    background-color: transparent;
+  }
+
+tbody tr:hover {
+    background-color: rgb(91, 91, 91);
+}
+
+th {
+    font-weight: 600;
+}
+
+
+.Ajout_conge {
+    position: absolute;
+    right: 1.5%;
+    bottom: 10px;
+}
+
+.Ajout_conge a {
+    text-decoration: none;
+    font-size: 13px;
+}
+
+.Ajout_conge a button {
+    width: 200px;
+    height: 30px;
+    background-color: transparent;
+    border: 3px solid white;
+    border-radius: 10px;
+    transition: var(--trans-03);
+}
+
+.Ajout_conge a button:hover {
+    border: none;
+    background-color: var(--active);
+}
+
+
+.conge_valide {
+    width: 100%;
+    position: relative;
+}
+
+.conge_valide h4 {
+    position: absolute;
+    top: 10px !important;
+    bottom: 10px !important;
+}
+
+@media screen and (max-width: 1130px) {
+    table {
+        font-size: 10px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    tr,
+    th {
+        padding: 2px;
+    }
+    .contenu header {
+        flex-direction: column;
+        height: 100px;
+        text-align: center;
+    }
+
+    .contenu header h4 {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: -10px;
+    }
+
+    .contenu header h4{
+        text-align: center;
+        justify-content: center;
+      }
+
+    .contenu header .bouton {
+        flex-direction: column; /* Les boutons passent en colonne */
+        width: 100%; /* Facultatif pour que ça prenne toute la largeur */
+        font-size: 9px;
+        padding: 0px;
+        align-items: center;
+        margin-top: 10px;
+        justify-content: center;
+        text-align: center;
+      }
+    
+      .contenu header .bouton a button {
+        height: 20px;
+        width: 85px;
+        border-radius: 5px;
+        padding: 2px;
+      }
+}
+
+@media screen and (max-width: 768px) {
+    table {
+        font-size: 10px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    tr,
+    th {
+        padding: 2px;
+    }
+
+    .contenu header {
+        flex-direction: column;
+        align-items: center;/* Optionnel : aligne à gauche */
+        height: 100px;
+        text-align: center;
+    }
+
+    .contenu header h4 {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: -10px;
+    }
+
+    .contenu header .bouton {
+        flex-direction: column; /* Les boutons passent en colonne */
+        font-size: 9px;
+        padding: 0px;
+        align-items: center;
+        margin-top: 10px;
+      }
+
+      .contenu header h4{
+        text-align: center;
+      }
+    
+      .contenu header .bouton a button {
+        height: 20px;
+        width: 85px;
+        border-radius: 5px;
+        padding: 2px;
+      }
+
+}
+
+@media screen and (max-width: 480px) {
+    table {
+        font-size: 8px;
+        overflow-x: auto;
+        display: block;
+    }
+
+    tr,
+    th {
+        padding: 2px;
+    }
+
+    .contenu header {
+        flex-direction: column;
+        align-items: center;/* Optionnel : aligne à gauche */
+        height: 100px;
+        text-align: center;
+    }
+
+    .contenu header h4 {
+        font-size: 14px;
+        font-weight: bold;
+        margin-top: -10px;
+    }
+
+    .contenu header h4{
+        text-align: center;
+      }
+
+    .contenu header .bouton {
+        flex-direction: column; /* Les boutons passent en colonne */
+        font-size: 9px;
+        padding: 0px;
+        align-items: center;
+        margin-top: 10px;
+      }
+    
+      .contenu header .bouton a button {
+        height: 20px;
+        width: 85px;
+        border-radius: 5px;
+        padding: 2px;
+      }
+
+      .Ajout_conge a button{
+        font-size: 9px;
+        padding: 2px;
+        width: 80px;
+      }
+}

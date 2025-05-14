@@ -1,0 +1,214 @@
+:root{
+    /* Couleur */
+    --bg-nav: #1B0C20;
+    --bg-body: #1B0E20;
+    --body-second-bg: #6a6363bf;
+    --bouton-hover : #C4BCBC;
+    --active: #6A2C82;
+    --text-color: #e0e0e0ce;
+    --menu-color: #14041ae6;
+
+    /* transition */
+    --trans-02: all 0.2s ease;
+    --trans-03: all 0.3s ease;
+    --trans-04: all 0.4s ease;
+    --trans-05: all 0.5s ease;
+}
+
+.dashboard{
+    padding: 20px 70px 10px 70px;
+    font-size: 12px;
+
+}
+
+.contenu{
+    background-color: var(--body-second-bg);
+    padding: 10px 20px;
+    border-radius: 10px;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.contenu header{
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 95%;
+    height: 60px;
+    margin: auto;
+    padding: 10px 20px;
+    background-color: var(--active);
+    border-radius: 10px;
+    justify-content: center;
+}
+
+.contenu header h3{
+    font-size: 1.5rem;
+    color: var(--text-color);
+}
+.contenu header h3 span{
+    font-size: 14px;
+    color: red;
+}
+
+.contenu .notif_contenu{
+    margin-top: 10px;
+    width: 100%;
+}
+.contenu .notif_contenu .note{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--body-second-bg);
+    list-style: none;
+    margin-bottom: 10px;
+    border-radius: 10px;
+}
+
+.contenu .notif_contenu strong{
+    font-size: 14px;
+    color: #000;
+}
+
+.contenu .notif_contenu p{
+    display: flex;
+    /* float: left; */
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+    overflow: hidden;
+}
+
+.contenu .notif_contenu .date_notif{
+    float: right;
+    padding: 5px;
+    font-size: 8px;
+    color: rgba(255, 255, 255, 0.815);
+}
+
+.notifications-page .notifications-scrollable {
+    max-height: 70vh;
+    overflow-y: auto;
+  }
+
+/* Style pour le conteneur avec défilement */
+.notifications-scrollable {
+    max-height: 70vh; /* 70% de la hauteur de la fenêtre */
+    overflow-y: auto; /* Permet le défilement vertical */
+    padding-right: 5px; /* Espace pour la barre de défilement */
+  }
+  
+  /* Style pour améliorer l'apparence des notifications */
+  .notif_contenu {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .note {
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    transition:  0.2s;
+  }
+
+  .note:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  /* Assurer que le défilement n'affecte que cette page */
+  .dashboard {
+    height: 100vh;
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .annotation {
+    flex-shrink: 0; /* Empêche la section titre de rétrécir */
+  }
+  
+  .contenu {
+    flex-grow: 1; /* Permet au contenu de grandir */
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Cache tout débordement */
+  }
+  
+  .contenu header {
+    flex-shrink: 0; /* Empêche l'en-tête de rétrécir */
+  }
+  
+  /* Style pour la barre de défilement */
+  .notifications-scrollable::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .notifications-scrollable::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+  }
+  
+  .notifications-scrollable::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+  }
+  
+  .notifications-scrollable::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+
+  /* Styles pour les différents types de notifications */
+.note.success {
+  border-left: 4px solid #00f539; /* Bordure verte */
+  background-color: rgba(40, 167, 69, 0.1); /* Fond vert très clair */
+}
+
+.note.error {
+  border-left: 4px solid #f71201; /* Bordure orange */
+  background-color: rgba(253, 126, 20, 0.1); /* Fond orange très clair */
+}
+
+/* Styles pour le texte des notifications */
+.note.success strong {
+  color: #00f539; /* Texte vert */
+}
+
+.note.error strong {
+  color: #f71201; /* Texte orange */
+}
+
+/* Styles pour le modal selon le type */
+#notificationModal.success .modal-content {
+  border-top: 5px solid #00f539;
+}
+
+#notificationModal.error .modal-content {
+  border-top: 5px solid #f71201;;
+}
+
+#modalTitle.success {
+  color: #00f539;
+}
+
+#modalTitle.error {
+  color: #f71201;;
+}
+
+
+/* NOTIFICATION BADGE */
+.notification-badge{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 12px;
+  height: 12px;
+  background-color: #007bff;
+  border-radius: 50%;
+  display: inline-block;
+  box-shadow: 0 0 10px #007bff,
+  0 0 10px #007bff,
+  0 0 10px #007bff,
+  0 0 10px #007bff;
+}
