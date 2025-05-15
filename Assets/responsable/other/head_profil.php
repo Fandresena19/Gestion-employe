@@ -136,6 +136,23 @@ if (isset($_SESSION['error'])) {
       background-color: #f2dede;
       border-color: #ebccd1;
     }
+
+     /* Specific styles for select elements to make background darker */
+  select.form-control {
+    background-color: #2c2c2c !important;
+    color: white !important;
+    appearance: none !important; /* Remove default browser styling */
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%)  !important;
+    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px) !important;
+    background-size: 5px 5px, 5px 5px !important;
+    background-repeat: no-repeat !important;
+  }
+
+  select.form-control:focus {
+    background-color: #1e1e1e !important;
+    outline: none !important;
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
+  }
   </style>
 
 </head>
