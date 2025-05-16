@@ -142,16 +142,20 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
         </div>
         <div class="conge-item total">
             <strong>Total Congés (cette période)</strong>
-            <p><?php echo $nb_conges; ?></p>
+            <p><?php echo $nb_conges; ?> Congés</p>
         </div>
-        <div class="conge-item valides">
+        <!-- <div class="conge-item valides">
             <strong>Congés Validés</strong>
-            <p><?php echo $nb_valides; ?></p>
+            <p>
+                <?php // echo $nb_valides; ?>
+            </p>
         </div>
         <div class="conge-item refuses">
             <strong>Congés Refusés</strong>
-            <p><?php echo $nb_refuses; ?></p>
-        </div>
+            <p>
+                <?php // echo $nb_refuses; ?>
+            </p>
+        </div> -->
     </div>
 </div>
 
@@ -221,7 +225,7 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
                 echo "</td>";
                 echo "</tr>";
             }
-
+            
             if (!$has_rows) {
                 echo '<tr><td colspan="9" class="text-center">Aucun congé trouvé pour cette période</td></tr>';
             }
@@ -283,8 +287,14 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
     .conge-item.total {
         background-color: #428bca;
         color: white;
+        height: 50px;
     }
-
+    @media(max-width: 768px) {
+        .conge-item.total{
+            min-width: 150px;
+            height: auto;
+        }
+    }
     .conge-item.valides {
         background-color: #337ab7;
         color: white;

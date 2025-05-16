@@ -139,14 +139,14 @@ $nb_refusees = $stats['nb_refusees'] ?: 0;
             <strong>Total Permissions (cette période)</strong>
             <p><?php echo $nb_permissions; ?></p>
         </div>
-        <div class="permission-item validees">
+        <!-- <div class="permission-item validees">
             <strong>Permissions Validées</strong>
-            <p><?php echo $nb_validees; ?></p>
+            <p><?php //echo $nb_validees; ?></p>
         </div>
         <div class="permission-item refusees">
             <strong>Permissions Refusées</strong>
-            <p><?php echo $nb_refusees; ?></p>
-        </div>
+            <p><?php //echo $nb_refusees; ?></p>
+        </div> -->
     </div>
 </div>
 
@@ -258,7 +258,15 @@ $nb_refusees = $stats['nb_refusees'] ?: 0;
         padding: 10px;
         margin: 5px;
         min-width: 150px;
+        height: 50px;
         border-radius: 5px;
+    }
+    @media(max-width: 768px){
+        .permission-item{
+            min-width: 150px;
+            height: auto;
+        }
+
     }
 
     .permission-item.quota {
