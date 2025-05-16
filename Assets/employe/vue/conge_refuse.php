@@ -52,7 +52,7 @@ $stmt->execute(['matricule_emp' => $matricule_emp]);
 
       echo '
             <header>';
-      echo '<h4 align="center">Congé réfué</h4>';
+      echo '<h4 align="center">Congé réfusé</h4>';
       echo '<div class="bouton">
               <a href="./mes_conge.php"><button type="submit">Retour</button></a>
               </div>';

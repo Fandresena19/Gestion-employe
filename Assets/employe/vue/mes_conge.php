@@ -147,13 +147,15 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
         <!-- <div class="conge-item valides">
             <strong>Congés Validés</strong>
             <p>
-                <?php // echo $nb_valides; ?>
+                <?php // echo $nb_valides; 
+                ?>
             </p>
         </div>
         <div class="conge-item refuses">
             <strong>Congés Refusés</strong>
             <p>
-                <?php // echo $nb_refuses; ?>
+                <?php // echo $nb_refuses; 
+                ?>
             </p>
         </div> -->
     </div>
@@ -162,11 +164,16 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
 <div class="contenu">
     <header>
         <div class="bouton">
-            <a href="?filter=last_month"><button type="submit">Mois dernier</button></a>
-            <a href="?filter=last_week"><button type="submit">Semaine dernière</button></a>
-            <a href="?filter=current_month"><button type="submit">Mois courant</button></a>
+            <a href="./conge_valide.php"><button type="submit">Congé validé</button></a>
+            <a href="./conge_refuse.php"><button type="submit">Congé refusé</button></a>
         </div>
-    </header>
+    </header><br>
+
+    <div class="navigation">
+        <a href="?filter=last_month"><button type="submit">Mois dernier</button></a>
+        <a href="?filter=last_week"><button type="submit">Semaine dernière</button></a>
+        <a href="?filter=current_month"><button type="submit">Mois courant</button></a>
+    </div>
 
     <div class="custom-filter">
         <form method="GET" action="">
@@ -178,7 +185,6 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
             <button type="submit">Filtrer</button>
         </form>
     </div>
-    <br>
 
     <table class="table_conge">
         <thead>
@@ -225,7 +231,7 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
                 echo "</td>";
                 echo "</tr>";
             }
-            
+
             if (!$has_rows) {
                 echo '<tr><td colspan="9" class="text-center">Aucun congé trouvé pour cette période</td></tr>';
             }
@@ -262,7 +268,7 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
     }
 
     .conge-item {
-      text-align: center;
+        text-align: center;
         padding: 10px;
         margin: 5px;
         min-width: 150px;
@@ -289,12 +295,14 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
         color: white;
         height: 50px;
     }
+
     @media(max-width: 768px) {
-        .conge-item.total{
+        .conge-item.total {
             min-width: 150px;
             height: auto;
         }
     }
+
     .conge-item.valides {
         background-color: #337ab7;
         color: white;

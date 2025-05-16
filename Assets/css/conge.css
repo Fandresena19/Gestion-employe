@@ -70,6 +70,23 @@
     border: 2px solid white;
 }
 
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .navigation button{
+    background-color: #6A2C82;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+
 table {
     width: 100%;
     border-collapse: collapse !important;

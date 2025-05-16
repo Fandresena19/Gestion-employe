@@ -79,8 +79,6 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
           echo '</td></tr>';
         }
         ?>
-      </tbody>
-    </table>
     
     <?php
     // Only display total if permissions exist
@@ -95,11 +93,13 @@ while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
       echo '<header>';
       echo '<h4 align="center">Aucune permission validée trouvée</h4>';
       echo '<div class="bouton">
-              <a href="./mes_permission.php"><button type="submit">Retour</button></a>
-            </div>';
+      <a href="./mes_permission.php"><button type="submit">Retour</button></a>
+      </div>';
       echo '</header> <br/>';
     }
     ?>
+    </tbody>
+  </table>
   </div>
   </div>
 
