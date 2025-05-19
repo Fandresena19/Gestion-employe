@@ -45,72 +45,15 @@ if (isset($_SESSION['error'])) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../bootstrap4/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../bootstrap4/boxicons-2.1.4/css/boxicons.min.css">
-  <link rel="stylesheet" href="../../css/style_nav.css">
+  <!-- <link rel="stylesheet" href="../../css/style_nav.css">
   <link rel="stylesheet" href="../../css/style_profil.css">
-  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/modal.css"> -->
+  <link rel="stylesheet" href="../../css/css_complet.css">
   <title><?= $user['nom_emp'] . " " . $user['prenom_emp']; ?></title>
 
-  <style>
-    /* MESSAGE ALERT ET SUCCESS */
-    .alert {
-      padding: 15px;
-      margin: auto;
-      width: calc(50% - 0px);
-      border: 1px solid transparent;
-      border-radius: 4px;
-    }
-
-    .alert-success {
-      color: #3c763d;
-      background-color: #b4d5a6;
-      border-color: #d6e9c6;
-    }
-
-    .alert-danger {
-      color: #a94442;
-      background-color: #f2dede;
-      border-color: #ebccd1;
-    }
-
-    /* Notification counter styles */
-    .notification-badge {
-      position: relative;
-      display: inline-block;
-    }
-
-    .badge {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      background-color: #ff4d4d;
-      color: white;
-      border-radius: 50%;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-      font-weight: bold;
-      min-width: 18px;
-      text-align: center;
-      opacity: 1 !important
-    }
-
-    .sidebar.close .notification-badge .badge {
-        right: -20px;
-        top: 0px;
-      }
-
-
-    .menu li {
-      position: relative;
-    }
-
-    .sidebar.close .notification-badge .badge {
-      right: 1px;
-      top: -5px;
-    }
-  </style>
 </head>
 
-<body>
+<body id="body_profil">
 
   <div class="container-fluid">
     <form action="../traitement/edition_emp.php" method="post" enctype="multipart/form-data">

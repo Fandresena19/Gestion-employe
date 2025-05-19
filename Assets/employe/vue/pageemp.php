@@ -34,9 +34,9 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
 
 <h2 class="head-text">Profil Employé</h2>
 
-<div class="contenu">
+<div class="contenu_profil">
 
-  <div class="contenu1">
+  <div class="contenu1_profil">
     <h3>Modifier employé</h3>
       <div class="sous-contenu">
         <div class="ligne1">
@@ -61,17 +61,20 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
 
       <div class="ligne3plus">
         <div>
-          <span><input type="password" name="current_password" placeholder="Votre mot de passe" id="mdp" />
+          <span><input type="password" name="current_password"
+           placeholder="Votre mot de passe" id="mdp" />
             <i class="bx bx-hide" id="icone"></i> </span>
         </div>
 
         <div>
-          <span><input type="password" name="new_password" placeholder="Nouveau mot de passe" id="mdp" />
+          <span><input type="password" name="new_password" 
+          placeholder="Nouveau mot de passe" id="mdp1" />
             <i class="bx bx-hide" id="icone"></i> </span>
         </div>
 
         <div>
-          <span><input type="password" name="confirm_password" placeholder="confirmer nouveau mot de passe" id="mdp" />
+          <span><input type="password" name="confirm_password" 
+          placeholder="confirmer nouveau mot de passe" id="mdp2" />
             <i class="bx bx-hide" id="icone"></i> </span>
         </div>
 
@@ -81,7 +84,7 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
 
   </div>
 
-  <div class="contenu2">
+  <div class="contenu2_profil">
     <div class="photo">
       <div class="cadre_photo" align="center">
 
@@ -95,7 +98,7 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
 
     <div class="detail">
 
-      <table>
+      <table class="tableau_profil">
 
         <tr><br>
           <td>Matricule </td>
@@ -128,14 +131,6 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
     </div>
   </div>
 </div>
-
-</div>
-</form>
-</div>
-</div>
-
-
-
 
 <?php
 include('../other/foot.php');

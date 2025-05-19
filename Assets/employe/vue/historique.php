@@ -152,31 +152,7 @@ if ($filter == 'current_month') {
 </div>
 
 <style>
-  .table_historique {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
-  }
-  
-  .table_historique th,
-  .table_historique td {
-    padding: 10px;
-    text-align: left;
-    border-bottom: 1px solid #444;
-  }
-  
-  .table_historique th {
-    background-color: #333;
-    color: white;
-  }
-  
-  .table_historique tbody tr:nth-child(even) {
-    background-color: rgb(91, 91, 91);
-  }
-  
-  .table_historique tbody tr:hover {
-    background-color: #4a4a4a;
-  }
+
   
   .status-valid {
     color: #5cb85c;
@@ -193,54 +169,4 @@ if ($filter == 'current_month') {
     font-weight: bold;
   }
   
-  .navigation {
-    margin-bottom: 15px;
-  }
-  
-  .navigation button {
-    margin-right: 10px;
-    padding: 8px 15px;
-    border-radius: 4px;
-    background-color: #6A2C82;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .navigation button:hover {
-    background-color: #286090;
-  }
-  
-  .custom-filter {
-    margin-top: 15px;
-    padding: 10px;
-    background-color: #55555580;
-    border-radius: 5px;
-  }
-  
-  .custom-filter input[type="date"] {
-    padding: 5px;
-    border-radius: 3px;
-    border: 1px solid #ccc;
-    margin: 0 10px;
-  }
-  
-  .custom-filter button {
-    padding: 5px 15px;
-    border-radius: 3px;
-    background-color: #337ab7;
-    color: white;
-    border: none;
-    cursor: pointer;
-  }
-  
-  .error-message {
-    background-color: #f8d7da;
-    color: #721c24;
-    padding: 10px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    text-align: center;
-    font-weight: bold;
-  }
 </style>

@@ -6,15 +6,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./bootstrap4/css/bootstrap.min.css">
   <link rel="stylesheet" href="./bootstrap4/boxicons-2.1.4/css/boxicons.min.css">
-  <link rel="stylesheet" href="./css/login.css">
+  <!-- <link rel="stylesheet" href="./css/login.css"> -->
+   <link rel="stylesheet" href="./css/css_complet.css">
   <!-- <link rel="stylesheet" href="./css/teste.css"> -->
   <title>Se connecter</title>
 </head>
 
-<body>
+<body id="login_body">
 
 
-  <div class="container-fluid">
+  <div class="container-fluid" id="login_container">
     <div class="contenu-entreprise">
       <img src="./Icone/Logo.png" alt="Logo S RAYs"><br>
       <h3 align="center">

@@ -23,7 +23,7 @@
     --trans-05: all 0.5s ease;
 }
 /* === body === */
-.contenu{
+.contenu_profil{
     padding: 20px 70px 10px 70px;
     display: grid;
     grid-template-columns: 65% 35%;
@@ -51,6 +51,7 @@
 .contenu1 .ligne1{
     margin-top: 5%;
 }
+
 .ligne1 .input_mat{
     background-color: transparent;
     border: none;

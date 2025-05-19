@@ -37,133 +37,16 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="../../bootstrap4/css/bootstrap.min.css">
   <link rel="stylesheet" href="../../bootstrap4/boxicons-2.1.4/css/boxicons.min.css">
-  <link rel="stylesheet" href="../../css/style_nav.css">
+  <!-- <link rel="stylesheet" href="../../css/style_nav.css">
   <link rel="stylesheet" href="../../css/conge.css">
   <link rel="stylesheet" href="../../css/modif_emp.css">
-  <link rel="stylesheet" href="../../css/modal.css">
+  <link rel="stylesheet" href="../../css/modal.css"> -->
+  <link rel="stylesheet" href="../../css/css_complet.css">
   <title>Responsable</title>
 
-  <style>
-      /* MESSAGE ALERT ET SUCCESS */
-      .alert {
-      padding: 15px;
-      margin: auto;
-      width: calc(50% - 0px);
-      border: 1px solid transparent;
-      border-radius: 4px;
-    }
-
-    .alert-success {
-      color: #3c763d;
-      background-color: #b4d5a6;
-      border-color: #d6e9c6;
-    }
-    .alert-success strong{
-      color:#3c763d
-    }
-
-    .alert-danger {
-      color: #a94442;
-      background-color: #f2dede;
-      border-color: #ebccd1;
-    }
-    
-    .conge-summary {
-      background-color: #6a6363bf;
-      border-radius: 8px;
-      padding: 15px;
-      margin-bottom: 20px;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .conge-summary h4 {
-      color: #e0e0e0ce;
-      margin-bottom: 10px;
-    }
-
-    .conge-detail {
-      display: flex;
-      justify-content: space-around;
-      flex-wrap: wrap;
-    }
-
-    .conge-item {
-      text-align: center;
-      padding: 8px;
-      margin: 5px;
-      min-width: 150px;
-      border-radius: 5px;
-    }
-
-    .conge-item.taken {
-      background-color: #f0ad4e;
-      max-height: 50px;
-    }
-
-    .conge-item.remaining {
-      background-color: #5cb85c;
-      max-height: 50px;
-      color: white;
-    }
-
-    .conge-item.quota {
-      background-color: #5bc0de;
-      max-height: 50px;
-      color: white;
-    }
-
-    /* Notification counter styles */
-    .notification-badge {
-      position: relative;
-      display: inline-block;
-    }
-    
-    .badge {
-      position: absolute;
-      top: -15px;
-      right: -15px;
-      background-color: #ff4d4d;
-      color: white;
-      border-radius: 50%;
-      padding: 0.25rem 0.5rem;
-      font-size: 0.75rem;
-      font-weight: bold;
-      min-width: 18px;
-      text-align: center;
-      opacity: 1 !important
-    }
-
-    .sidebar.close .notification-badge .badge {
-        right: -20px;
-        top: -15px;
-      }
-
-    
-    .menu li {
-      position: relative;
-    }
-
-     /* Specific styles for select elements to make background darker */
-  select.form-control {
-    background-color: #2c2c2c !important;
-    color: white !important;
-    appearance: none !important; /* Remove default browser styling */
-    background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%)  !important;
-    background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px) !important;
-    background-size: 5px 5px, 5px 5px !important;
-    background-repeat: no-repeat !important;
-  }
-
-  select.form-control:focus {
-    background-color: #1e1e1e !important;
-    outline: none !important;
-    box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
-  }
-
-  </style>
 </head>
 
-<body>
+<body id="body_sidebar">
 
   <div class="container-fluid">
     <div id="container">
