@@ -15,7 +15,7 @@ if (isset($_SESSION['error_message'])) {
 
 $user_id = $_SESSION['Matricule_resp'];
 
-$stmt = $bdd->prepare("SELECT * FROM responsable r JOIN service s ON r.id_service=s.id_service JOIN departement d ON d.id_departement=r.id_departement WHERE r.Matricule_resp = ?");
+$stmt = $bdd->prepare("SELECT * FROM responsable r JOIN service s ON r.id_service=s.id_service WHERE r.Matricule_resp = ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch(PDO::FETCH_ASSOC);
 

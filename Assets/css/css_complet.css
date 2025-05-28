@@ -961,62 +961,69 @@ textarea {
   border-radius: 15px;
 }
 
-.contenu1_profil .ligne1{
+.contenu1_profil .ligne1 {
   margin-top: 5%;
 }
-.ligne1 .input_mat{
+
+.ligne1 .input_mat {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--body-second-bg);
   width: 15%;
 
 }
-.ligne1 .input2{
+
+.ligne1 .input2 {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--body-second-bg);
   width: 40%;
   transition: var(--trans-05);
 }
-.ligne1 .input2:focus{
+
+.ligne1 .input2:focus {
   border: none;
   border-bottom: 3px solid var(--active);
   outline: none;
   transform: translateY(-4px);
 }
 
-.input3{
+.input3 {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--body-second-bg);
   width: 30%;
   transform: var(--trans-05);
 }
-.ligne2 .input4{
+
+.ligne2 .input4 {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--body-second-bg);
-  width:25%;
+  width: 25%;
   transform: var(--trans-05);
 }
-.ligne2 .input4:focus{
-  border: none;
-  border-bottom: 3px solid var(--active);
-  outline: none;
-  transform: translateY(-4px);
-}
-.input3:focus{
+
+.ligne2 .input4:focus {
   border: none;
   border-bottom: 3px solid var(--active);
   outline: none;
   transform: translateY(-4px);
 }
 
-.ligne3plus{
+.input3:focus {
+  border: none;
+  border-bottom: 3px solid var(--active);
+  outline: none;
+  transform: translateY(-4px);
+}
+
+.ligne3plus {
   display: flex;
   flex-wrap: wrap;
 }
-.ligne3plus input{
+
+.ligne3plus input {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--body-second-bg);
@@ -1024,19 +1031,22 @@ textarea {
   font-size: 14px;
   transform: var(--trans-05);
 }
-.ligne3plus span{
+
+.ligne3plus span {
   display: flex;
 }
-.ligne3plus span i{
+
+.ligne3plus span i {
   margin-left: -10%;
 }
-.ligne3plus input:focus{
+
+.ligne3plus input:focus {
   border: none;
   outline: none;
   border-bottom: 2px solid var(--body-second-bg);
 }
 
-.ligne4 .input3{
+.ligne4 .input3 {
   background-color: transparent;
   border: none;
   border-bottom: 2px solid var(--body-second-bg);
@@ -1045,14 +1055,15 @@ textarea {
   font-size: 14px;
 }
 
-.ligne4 span{
+.ligne4 span {
   display: flex;
 }
-.ligne4 span i{
+
+.ligne4 span i {
   margin-left: -3%;
 }
 
-.bouton_confirmer{
+.bouton_confirmer {
   width: 80%;
   height: 50px;
   font-size: 16px;
@@ -1067,102 +1078,114 @@ textarea {
   margin-top: 20%;
   transform: var(--trans-02);
 }
-.bouton_confirmer:hover{
+
+.bouton_confirmer:hover {
   background-color: var(--active);
 }
 
-.contenu2_profil{
+.contenu2_profil {
   background-color: var(--body-second-bg);
   border-radius: 10px;
-  padding: 10px ;
+  padding: 10px;
   height: auto;
 }
 
-.photo_de_profil{
+.photo_de_profil {
   border-radius: 10px;
 }
 
-.tableau_profil td, .tableau_profil tr{
+.tableau_profil td,
+.tableau_profil tr {
   border: none !important;
 }
 
-.tableau_profil tr:hover{
+.tableau_profil tr:hover {
   background-color: transparent;
 }
 
 @media screen and (max-width: 1075px) {
-  #body_profil{
-      overflow-x: hidden;
+  #body_profil {
+    overflow-x: hidden;
   }
-  .sidebar .image-text .image{
-      margin-left: -15px;
+
+  .sidebar .image-text .image {
+    margin-left: -15px;
   }
 
   .contenu_profil {
-      grid-template-columns: 1fr;
-      gap: 20px;
-  }
-  .contenu1_profil h3{
-      height: 50px;
-      font-size: 18px;
-  }
-  .contenu1_profil input{
-      font-size: 12px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .contenu2_profil h4{
-      font-size: 16px;
-      font-weight: bold;
+  .contenu1_profil h3 {
+    height: 50px;
+    font-size: 18px;
   }
-  .contenu2_profil td{
-      font-size: 12px;
+
+  .contenu1_profil input {
+    font-size: 12px;
+  }
+
+  .contenu2_profil h4 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .contenu2_profil td {
+    font-size: 12px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  #body_profil{
-      overflow-x: hidden;
+  #body_profil {
+    overflow-x: hidden;
   }
-  .sidebar .image-text .image{
-      margin-left: -15px;
+
+  .sidebar .image-text .image {
+    margin-left: -15px;
   }
 
   .contenu_profil {
-      grid-template-columns: 1fr;
-      gap: 20px;
-  }
-  .contenu1_profil h3{
-      height: 50px;
-      font-size: 18px;
-  }
-  .contenu1_profil input{
-      font-size: 12px;
+    grid-template-columns: 1fr;
+    gap: 20px;
   }
 
-  .contenu2_profil h4{
-      font-size: 16px;
-      font-weight: bold;
+  .contenu1_profil h3 {
+    height: 50px;
+    font-size: 18px;
   }
-  .contenu2_profil td{
-      font-size: 12px;
+
+  .contenu1_profil input {
+    font-size: 12px;
+  }
+
+  .contenu2_profil h4 {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .contenu2_profil td {
+    font-size: 12px;
   }
 }
 
 @media screen and (max-width: 480px) {
-  .contenu1_profil h3{
-      height: 40px;
-      font-size: 16px;
-  }
-  .contenu1_profil input{
-      font-size: 12px;
-  }
-  .contenu1_profil input{
-      font-size: 12px;
+  .contenu1_profil h3 {
+    height: 40px;
+    font-size: 16px;
   }
 
-  .contenu2_profil h4{
-      font-size: 16px;
-      font-weight: bold;
+  .contenu1_profil input {
+    font-size: 12px;
+  }
+
+  .contenu1_profil input {
+    font-size: 12px;
+  }
+
+  .contenu2_profil h4 {
+    font-size: 16px;
+    font-weight: bold;
   }
 }
 
@@ -1179,11 +1202,12 @@ textarea {
 }
 
 .clearfix button:hover {
-  opacity:0.5;
+  opacity: 0.5;
 }
 
 /* Float cancel and delete buttons and add an equal width */
-.cancelbtn, .deletebtn {
+.cancelbtn,
+.deletebtn {
   width: 30%;
   border-radius: 10px;
 }
@@ -1210,14 +1234,20 @@ textarea {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 999; /* Sit on top */
+  display: none;
+  /* Hidden by default */
+  position: fixed;
+  /* Stay in place */
+  z-index: 999;
+  /* Sit on top */
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
+  width: 100%;
+  /* Full width */
+  height: 100%;
+  /* Full height */
+  overflow: auto;
+  /* Enable scroll if needed */
   background-color: var(--bg-body);
   padding: 10%;
 }
@@ -1225,9 +1255,11 @@ textarea {
 /* Modal Content/Box */
 .modal-content {
   background-color: var(--bg-body);
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 5% auto 15% auto;
+  /* 5% from the top, 15% from the bottom and centered */
   border: none;
-  width: 50%; /* Could be more or less, depending on screen size */
+  width: 50%;
+  /* Could be more or less, depending on screen size */
 }
 
 /* Style the horizontal ruler */
@@ -1235,7 +1267,7 @@ hr {
   border: 1px solid #f1f1f1;
   margin-bottom: 25px;
 }
- 
+
 /* The Modal Close Button (x) */
 .close {
   position: absolute;
@@ -1261,7 +1293,299 @@ hr {
 
 /* Change styles for cancel button and delete button on extra small screens */
 @media screen and (max-width: 700px) {
-  .cancelbtn, .deletebtn {
-     width: 100% !important;
+
+  .cancelbtn,
+  .deletebtn {
+    width: 100% !important;
+  }
+}
+
+/* Overlay effect when notifications are shown */
+.content-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+}
+
+/* Notification dropdown styles - Improved version */
+.notification-dropdown {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  border-radius: 10px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: #6a2c82;
+  color: white;
+  border-radius: 10px 10px 0 0;
+}
+
+.notification-header h3 {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.options-icon {
+  cursor: pointer;
+  font-size: 1.2rem;
+}
+
+.notification-tabs {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f9fa;
+}
+
+.notification-tab {
+  flex: 1;
+  text-align: center;
+  padding: 12px;
+  cursor: pointer;
+  color: #1B0E20;
+  transition: all 0.3s ease;
+}
+
+.notification-tab.active {
+  font-weight: bold;
+  border-bottom: 3px solid #6a2c82;
+  color: #6a2c82;
+  background-color: rgba(106, 44, 130, 0.05);
+}
+
+.notification-list {
+  padding: 0;
+}
+
+.notification-item {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notification-item:hover {
+  background-color: #f5f5f5;
+}
+
+/* Styles from notif.php */
+.notification-item.non_lu {
+  position: relative;
+  font-weight: bold;
+  background-color: rgba(106, 44, 130, 0.2);
+  box-shadow: rgb(0, 221, 255) 0px 0px 15px;
+}
+
+.notification-item.lu {
+  background-color: rgba(129, 127, 127, 0.1);
+}
+
+.notification-dot {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  background-color: #6a2c82;
+  border-radius: 50%;
+}
+
+.notification-icon {
+  margin-right: 15px;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #6a2c82;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.notification-content {
+  flex: 1;
+}
+
+.notification-message {
+  margin: 0 0 5px 0;
+}
+
+.notification-time {
+  font-size: 0.85rem;
+  color: #888;
+}
+
+.see-all {
+  text-align: center;
+  padding: 12px;
+  background-color: #f8f9fa;
+  color: #6a2c82;
+  font-weight: bold;
+  cursor: pointer;
+  border-top: 1px solid #ddd;
+  border-radius: 0 0 10px 10px;
+  transition: background-color 0.2s ease;
+}
+
+.see-all:hover {
+  background-color: #ececec;
+}
+
+.notification-empty {
+  padding: 30px;
+  text-align: center;
+  color: #888;
+  font-style: italic;
+}
+
+/* Type classes from notif.php */
+.success {
+  border-left: 5px solid #28a745;
+}
+
+.error {
+  border-left: 5px solid #dc3545;
+}
+
+.info {
+  border-left: 5px solid #17a2b8;
+}
+
+/* Notification Modal styles */
+#notificationModal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  max-width: 500px;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  animation: modalopen 0.4s;
+}
+
+@keyframes modalopen {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  transition: color 0.2s;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modalTitle {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  padding-bottom: 5px;
+}
+
+#modalDate {
+  text-align: right;
+  margin-top: 15px;
+  color: #888;
+  font-size: 0.9em;
+}
+
+.clearfix {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.clearfix button {
+  padding: 10px 20px;
+  border-radius: 5px;
+  width: auto;
+  height: auto;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 0.2s;
+}
+
+.deletebtn {
+  background-color: #dc3545;
+  color: white;
+  border: none;
+}
+
+.deletebtn:hover {
+  background-color: #c82333;
+}
+
+.cancelbtn {
+  background-color: #6c757d;
+  color: white;
+  border: none;
+}
+
+.cancelbtn:hover {
+  background-color: #5a6268;
+}
+
+/* Media query for mobile */
+@media (max-width: 768px) {
+  .notification-dropdown {
+    width: 95%;
+    max-height: 70vh;
+  }
+
+  .modal-content {
+    width: 95%;
+    margin: 30% auto;
   }
 }

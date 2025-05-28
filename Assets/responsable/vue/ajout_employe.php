@@ -72,12 +72,6 @@ if ($result->rowCount() > 0) {
 
 
     <div class="form-group">
-      <label>Rôle</label>
-      <input type="text" name="role" class="form-control" required>
-    </div>
-
-
-    <div class="form-group">
       <label>Téléphone</label>
       <input type="text" name="telephone" class="form-control" required>
     </div>
@@ -106,7 +100,7 @@ if ($result->rowCount() > 0) {
     <div class="form-group">
       <label> Nouveau mot de passe</label>
       <input type="password" name="mdp" class="form-control" required>
-    </div><br>
+    </div>
 
     <div class="form-group">
       <button type="submit" class="bouton_confirmer">Enregistrer</button>

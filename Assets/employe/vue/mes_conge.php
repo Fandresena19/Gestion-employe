@@ -55,7 +55,7 @@ if ($filter == 'current_month') {
 }
 
 // Quota annuel de congé (à récupérer depuis la base de données si nécessaire)
-$quotaCongeAnnuel = 30; // Quota fixé à 30 jours (exemple)
+$quotaCongeAnnuel = 30; // Quota fixé à 30 jours
 
 // Calculer les congés validés pour l'année en cours
 $sql_valides = "SELECT * FROM conge 
@@ -243,11 +243,11 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
     </div>
 </div>
 
-<style>
+<!-- <style>
     tbody tr:nth-child(even) {
   background-color: rgb(91, 91, 91);
 }
-</style>
+</style> -->
 
 <?php
 include('../other/foot.php');

@@ -51,7 +51,6 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
 
         <i class="ligne2">
           <input type="mail" name="mail" placeholder="<?= $user['mail_emp'] ?>" class="input3" />
-          <input type="text" name="role" placeholder="<?= $user['role'] ?>" class="input4" />
           <input type="text" name="telephone" placeholder="<?= $user['telephone'] ?>" class="input4" />
       </div><br><br />
 
@@ -102,7 +101,7 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
 
         <tr><br>
           <td>Matricule </td>
-          <td> <?= ':' . '&nbsp' . $user['matricule_emp'] ?></td>
+          <td> <?= ':' . '&nbsp' . $user['matricule'] ?></td>
         </tr>
         <tr>
           <td>Nom </td>

@@ -195,7 +195,6 @@ unset($employe); // Détruire la référence à la dernière valeur
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    color: white !important;
   }
 
   tr:hover {
