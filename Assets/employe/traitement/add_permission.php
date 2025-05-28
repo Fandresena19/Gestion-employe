@@ -76,15 +76,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   //Si tout est OK, insérer la demande dans la base de données
-  $query = "INSERT INTO permission (matricule_emp, reference_perm, date_demande_per, date_debut_per, 
+  $query = "INSERT INTO permission (matricule_emp, date_demande_per, date_debut_per, 
     date_fin_per, duree_jour_per, duree_heure_per, motif_per, Statut_permission)
-    VALUES (:matricule_emp, :reference_perm, :date_demande_per, :date_debut_per, :date_fin_per, 
+    VALUES (:matricule_emp, :date_demande_per, :date_debut_per, :date_fin_per, 
     :duree_jour_per, :duree_heure_per, :motif_per, :statut_permission)";
 
   $stmtn = $bdd->prepare($query);
   $result = $stmtn->execute([
     'matricule_emp' => $_POST['emp'],
-    'reference_perm' => $_POST['ref'],
     'date_demande_per' => $_POST['dateDem'],
     'date_debut_per' => $_POST['dateD'],
     'date_fin_per' => $_POST['dateF'],
@@ -114,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'Statut_notif_resp' => 'non lu'
     ]);
 
-    $_SESSION['success'] = "Votre demande de congé de $dureeAbsenceJ jours $dureeAbsenceH heures a été soumise avec succès. Il vous restera $soldeJours jours $soldeHeures heures de congé disponible si cette demande est validée.";
+    $_SESSION['success'] = "Votre demande de permission de $dureeAbsenceJ jours $dureeAbsenceH heures a été soumise avec succès. Il vous restera $soldeJours jours $soldeHeures heures de permission disponible si cette demande est validée.";
     header('Location: ../vue/mes_permission.php');
     exit();
   } else {

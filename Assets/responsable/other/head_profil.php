@@ -82,7 +82,7 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
 <body id="body_profil">
 
   <div class="container-fluid">
-    <form action="../traitement/edition_emp.php" method="post" enctype="multipart/form-data">
+    <!-- <form action="../traitement/edition_emp.php" method="post" enctype="multipart/form-data"> -->
       <div id="container">
         <!-- Content overlay for when notification dropdown is open -->
         <div class="content-overlay" id="content-overlay"></div>

@@ -354,16 +354,20 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 20px;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: var(--active);
     padding: 10px;
     border-radius: 5px;
   }
   
   .navigation button {
-    background-color: #6A2C82;
+    background-color: transparent;
     border: none;
     padding: 5px 10px;
-    border-radius: 5px;
+    border-radius: 10px;
+    height: 30px;
+  }
+  .navigation button:hover{
+    border: 2px solid white;
   }
   
   /* Filtre  */

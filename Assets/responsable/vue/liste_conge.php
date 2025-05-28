@@ -86,7 +86,8 @@ if ($filter == 'current_month') {
     $where_clause .= " AND c.date_demande BETWEEN :start_date AND :end_date";
     $params['start_date'] = $custom_start;
     $params['end_date'] = $custom_end;
-    $period_text = "du " . date('d/m/Y', strtotime($custom_start)) . " au " . date('d/m/Y', strtotime($custom_end));
+    $period_text = "du " . date('d/m/Y', strtotime($custom_start))
+     . " au " . date('d/m/Y', strtotime($custom_end));
 } else {
     $period_text = "de tous les congés";
 }
