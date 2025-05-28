@@ -1,0 +1,59 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: var(--text-color);
+}
+
+:root {
+  /* Couleur */
+  --bg-nav: #1B0C20;
+  --bg-body: #1B0E20;
+  --body-second-bg: #6a6363bf;
+  --bouton-hover: #C4BCBC;
+  --active: #6A2C82;
+  --text-color: #e0e0e0ce;
+  --menu-color: #14041ae6;
+
+    /* transition */
+    --trans-02: all 0.2s ease;
+    --trans-03: all 0.3s ease;
+    --trans-04: all 0.4s ease;
+    --trans-05: all 0.5s ease;
+}
+
+body {
+    background: var(--bg-body);
+}
+
+form {
+    margin: auto;
+    margin-top: 10%;
+    /* border: 2px solid white; */
+    max-width: 30%;
+}
+
+textarea {
+    background-color: transparent;
+    color: white;
+    font-size: 14px;
+    border: 1px solid gray;
+    resize: none;
+    width: 100%;
+}
+
+.bouton button {
+    padding: 7px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: var(--body-second-bg);
+    border: none;
+    font-size: 14px;
+    border-radius: 7px;
+    margin-left: 10%;
+}
+
+button:hover {
+    background-color: var(--active);
+}
