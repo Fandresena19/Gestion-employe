@@ -13,7 +13,7 @@
 
     #confirmationModal button {
       float: right;
-      width: 20%;
+      width: 30%;
       padding-left: 10px;
       padding-right: 10px;
       padding-top: 5px;

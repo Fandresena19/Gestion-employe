@@ -1320,7 +1320,7 @@ hr {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: var(--body-second-bg);
   width: 90%;
   max-width: 500px;
   box-shadow: 0px 8px 30px rgba(0, 0, 0, 0.3);

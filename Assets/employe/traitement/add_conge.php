@@ -82,14 +82,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   }
 
   // Si tout est OK, insérer la demande dans la base de données
-  $query = "INSERT INTO conge (matricule_emp, reference, date_debut, date_fin,
+  $query = "INSERT INTO conge (matricule_emp,  date_debut, date_fin,
      duree_jours_conge, duree_heure_conge, motif, date_demande, statut_conge) 
-              VALUES (:matricule, :reference, :date_debut, :date_fin, :duree_jours, :duree_heures, :motif, :date_demande, 'En attente')";
+              VALUES (:matricule, :date_debut, :date_fin, :duree_jours, :duree_heures, :motif, :date_demande, 'En attente')";
 
   $stmt = $bdd->prepare($query);
   $result = $stmt->execute([
     'matricule' => $matricule_emp,
-    'reference' => $reference,
     'date_debut' => $dateD,
     'date_fin' => $dateF,
     'duree_jours' => $dureeAbsenceJ,

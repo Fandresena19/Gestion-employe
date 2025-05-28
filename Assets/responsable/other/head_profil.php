@@ -195,22 +195,22 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
             }
 
             // Classe pour non lu/lu
-            $readClass = ($notification['Statut_notif'] == 'non lu') ? 'non_lu' : 'lu';
+            $readClass = ($notification['Statut_notif_resp'] == 'non lu') ? 'non_lu' : 'lu';
           ?>
             <div class="notification-item <?= $readClass ?> <?= $typeClass ?>"
-              data-id="<?= $notification['id_notification'] ?>"
-              data-genre="<?= htmlspecialchars($notification['Genre'], ENT_QUOTES, 'UTF-8') ?>"
-              data-message="<?= htmlspecialchars($notification['Message'], ENT_QUOTES, 'UTF-8') ?>"
-              data-date="<?= htmlspecialchars($notification['date_notif'], ENT_QUOTES, 'UTF-8') ?>"
+              data-id="<?= $notification['id_notification_resp'] ?>"
+              data-genre="<?= htmlspecialchars($notification['Genre_notif'], ENT_QUOTES, 'UTF-8') ?>"
+              data-message="<?= htmlspecialchars($notification['Message_resp'], ENT_QUOTES, 'UTF-8') ?>"
+              data-date="<?= htmlspecialchars($notification['date_notif_resp'], ENT_QUOTES, 'UTF-8') ?>"
               data-type="<?= htmlspecialchars($notification['Type'], ENT_QUOTES, 'UTF-8') ?>">
               <div class="notification-icon">
                 <i class="<?= $iconClass ?>"></i>
               </div>
               <div class="notification-content">
-                <p class="notification-message"><strong><?= $notification['Genre'] ?>:</strong> <?= $notification['Message'] ?></p>
-                <div class="notification-time"><?= $notification['date_notif'] ?></div>
+                <p class="notification-message"><strong><?= $notification['Genre_notif'] ?>:</strong> <?= $notification['Message_resp'] ?></p>
+                <div class="notification-time"><?= $notification['date_notif_resp'] ?></div>
               </div>
-              <?php if ($notification['Statut_notif'] == 'non lu'): ?>
+              <?php if ($notification['Statut_notif_resp'] == 'non lu'): ?>
                 <div class="notification-dot"></div>
               <?php endif; ?>
             </div>
