@@ -28,7 +28,7 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
 
 <div class="contenu">
 <header>
-    <h4>Ajout permission</h4>
+    <h4>Ajout tâche</h4>
 
     <div class="bouton">
       <a href="./mes_permission.php"><button>Retour</button></a>
@@ -51,6 +51,7 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
       <label for="duree_tache">Durée (heures):</label>
      <select name="duree_tache" id="duree_tache" class="form-control">
         <option value="1heure">1</option>
+        <option value="2heures">2</option>
         <option value="3heures">3</option>
         <option value="5heures">5</option>
         <option value="8heures">8</option>
@@ -89,7 +90,7 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
     </div>
 
     <div class="form-group">
-      <button type="submit" class="bouton_confirmer">Demander permission</button>
+      <button type="submit" class="bouton_confirmer">Ajouter</button>
     </div>
   </form>
 </div>
@@ -117,23 +118,9 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
 </script>
 
 <style>
-  .contenu {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #3a3a3a;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-  }
-
-  .form-group {
-    margin-bottom: 20px;
-  }
-
   label {
     display: block;
     margin-bottom: 5px;
-    color: #e0e0e0;
     font-weight: bold;
   }
   /* Specific styles for select elements to make background darker */
