@@ -108,7 +108,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $notif = "INSERT INTO notifications_responsable 
     (matricule_emp, Genre_notif, Message_resp, type, date_notif_resp, statut_notif_resp)
-        VALUES ( :matricule_emp, 'Nouveau congé' , :message, 'Congé', :date_notif_resp, :Statut_notif_resp)";
+        VALUES ( :matricule_emp, 'Congé' , :message, 'Congé', :date_notif_resp, :Statut_notif_resp)";
     $stmt = $bdd->prepare($notif);
     $result_notif = $stmt->execute([
       'matricule_emp' => $matricule_emp,

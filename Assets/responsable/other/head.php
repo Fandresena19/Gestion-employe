@@ -379,7 +379,7 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
             document.getElementById('modalTitle').innerText = genre;
             document.getElementById('modalTitle').className = type === 'Validé' ? 'success' :
               (type === 'Refusé' ? 'error' : 'info');
-            document.getElementById('modalMessage').innerText = message + ' (Verifiez votre ' + genre + ')';
+            document.getElementById('modalMessage').innerText = message + ' (Verifiez votre liste ' + genre + ')';
             document.getElementById('modalDate').innerText = 'Date: ' + date;
             document.getElementById('deleteLink').href = '../traitement/delete_notification.php?id=' + id;
 
