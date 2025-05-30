@@ -66,6 +66,18 @@ include('../other/head.php');
 $donnees = $bdd->query('select * from employer_login e join obtenir o on o.matricule_emp=e.matricule_emp join service s
  on s.id_service=e.id_service join grade g on g.id_grade=o.id_grade');
 
+   // Afficher le message de succès s'il existe
+if (isset($_SESSION['success_message'])) {
+  echo '<div class="alert alert-success">' . $_SESSION['success_message'] . '</div>';
+  unset($_SESSION['success_message']);
+}
+
+// Afficher le message d'erreur s'il existe
+if (isset($_SESSION['error_message'])) {
+  echo '<div class="alert alert-danger">' . $_SESSION['error_message'] . '</div>';
+  unset($_SESSION['error_message']);
+}
+
 ?>
 
 
