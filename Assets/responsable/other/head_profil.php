@@ -49,6 +49,7 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
   <link rel="stylesheet" href="../../css/css_complet.css" id="theme-stylesheet">
   
   <title>Responsable</title>
+  <link rel="icon" type="image/png" href="../../icone/Logo.png">
 
   <style>
     /* Style pour le bouton de changement de thème */
