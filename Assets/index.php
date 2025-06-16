@@ -10,6 +10,7 @@
    <link rel="stylesheet" href="./css/css_login.css">
   <!-- <link rel="stylesheet" href="./css/teste.css"> -->
   <title>Se connecter</title>
+  <link rel="icon" type="image/png" href="./icone/Logo.png">
 </head>
 
 <body id="login_body">
