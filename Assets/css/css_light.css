@@ -511,12 +511,12 @@ table {
   th {
     padding: 8px;
     text-align: left;
-    border: 3px solid var(--body-second-bg);
+    border: 3px solid #0808082d;
     border-radius: 5px;
   }
   
-  tbody tr:hover {
-    background-color: rgba(150, 204, 223, 0.712);
+  tbody tr:hover{
+    background-color: #52a8f4c9;
   }
   
   th {
@@ -1362,4 +1362,8 @@ hr {
     width: 95%;
     margin: 30% auto;
   }
+}
+
+.navigation .mois-actuel{
+  color: black;
 }

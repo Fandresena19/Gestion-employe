@@ -703,10 +703,6 @@ th {
   border-radius: 5px;
 }
 
-tbody tr:nth-child(even):hover {
-  background-color: transparent;
-}
-
 tbody tr:hover {
   background-color: rgb(91, 91, 91);
 }

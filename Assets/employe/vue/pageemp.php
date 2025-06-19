@@ -41,17 +41,17 @@ $req_notif = $bdd->query("SELECT * FROM notifications WHERE Matricule_emp = '$us
       <div class="sous-contenu">
         <div class="ligne1">
           <input type="text" value="<?= 'Matricule = ' . $user['matricule_emp'] ?>" name="im" class="input_mat" disabled />
-          <input type="text" placeholder="<?= strtoupper($user['nom_emp']) ?>" name="nom" class="input2" oninput="this.value = this.value.toUpperCase();" />
+          <input type="text" value="<?= strtoupper($user['nom_emp']) ?>" name="nom" class="input2" oninput="this.value = this.value.toUpperCase();" />
           <input type="text" name="prenom"
-            placeholder="<?= ucfirst(strtolower($user['prenom_emp'])) ?>"
+            value="<?= ucfirst(strtolower($user['prenom_emp'])) ?>"
             class="input2"
             oninput="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();">
 
         </div><br><br />
 
         <i class="ligne2">
-          <input type="mail" name="mail" placeholder="<?= $user['mail_emp'] ?>" class="input3" />
-          <input type="text" name="telephone" placeholder="<?= $user['telephone'] ?>" class="input4" />
+          <input type="mail" name="mail" value="<?= $user['mail_emp'] ?>" class="input3" />
+          <input type="text" name="telephone" value="<?= $user['telephone'] ?>" class="input4" />
       </div><br><br />
 
       <div class="ligne3">

@@ -20,6 +20,11 @@ $sql_clients = "SELECT DISTINCT client FROM timesheet ORDER BY client";
 $stmt_clients = $bdd->prepare($sql_clients);
 $stmt_clients->execute();
 $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
+
+$sql_heure = "SELECT DISTINCT duree_tache FROM timesheet ORDER BY duree_tache DESC";
+$stmt_heure = $bdd->prepare($sql_heure);
+$stmt_heure->execute();
+$heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="annotation">
@@ -27,7 +32,7 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
 </div>
 
 <div class="contenu">
-<header>
+  <header>
     <h4>Ajout tâche</h4>
 
     <div class="bouton">
@@ -39,7 +44,7 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="form-group">
       <label for="date_tache">Date de la tâche:</label>
-      <input type="date" id="date_tache" name="date_tache" class="form-control" value="<?php echo date('Y-m-d'); ?>">
+      <input type="date" id="date_tache" name="date_tache" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
     </div>
 
     <div class="form-group">
@@ -49,15 +54,17 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
 
     <div class="form-group">
       <label for="duree_tache">Durée (heures):</label>
-     <select name="duree_tache" id="duree_tache" class="form-control">
-        <option value="1heure">1</option>
-        <option value="2heures">2</option>
-        <option value="3heures">3</option>
-        <option value="5heures">5</option>
-        <option value="8heures">8</option>
-      </select>
-      <!-- <input type="number" id="duree_tache" name="duree_tache" class="form-control" required min="0.5" step="0.5" value="1"> -->
-      <small>Entrez la durée en heures </small>
+      <div class="heure-input-container">
+        <select id="duree_select" class="form-control" onchange="handleHeureSelection()">
+          <option value="">Selectionnez heure ou ajoutez-en</option>
+          <?php foreach ($heures as $heure): ?>
+            <option value="<?php echo htmlspecialchars($heure['duree_tache']); ?>"><?php echo htmlspecialchars($heure['duree_tache']); ?> heures</option>
+          <?php endforeach; ?>
+          <option value="nouveau">+ Ajouter heures</option>
+        </select>
+        <input type="number" id="duree" name="duree_tache" class="form-control" style="display:none;" placeholder="Ajouter heures" required value="1">
+        <small>Entrez la durée en heures </small>
+      </div>
     </div>
 
     <div class="form-group">
@@ -73,10 +80,10 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
         <input type="text" id="client" name="client" class="form-control" style="display:none;" placeholder="Nom du client">
       </div>
     </div>
-    
+
     <div class="form-group">
       <label for="mission">Mission</label>
-      <input type="text" id="mission" name="mission" class="form-control"  placeholder="Mission effectuée">
+      <input type="text" id="mission" name="mission" class="form-control" placeholder="Mission effectuée">
     </div>
 
     <div class="form-group">
@@ -115,6 +122,21 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
   document.addEventListener('DOMContentLoaded', function() {
     document.getElementById('client').value = document.getElementById('client_select').value;
   });
+
+  function handleHeureSelection() {
+    var select = document.getElementById('duree_select');
+    var input = document.getElementById('duree');
+
+    if (select.value === 'nouveau') {
+      input.style.display = 'block';
+      input.value = '';
+      input.required = true;
+    } else {
+      input.style.display = 'none';
+      input.value = select.value;
+      input.required = false;
+    }
+  }
 </script>
 
 <style>
@@ -123,12 +145,14 @@ $clients = $stmt_clients->fetchAll(PDO::FETCH_ASSOC);
     margin-bottom: 5px;
     font-weight: bold;
   }
+
   /* Specific styles for select elements to make background darker */
   select.form-control {
     background-color: #2c2c2c !important;
     color: white !important;
-    appearance: none !important; /* Remove default browser styling */
-    background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%)  !important;
+    appearance: none !important;
+    /* Remove default browser styling */
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%) !important;
     background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px) !important;
     background-size: 5px 5px, 5px 5px !important;
     background-repeat: no-repeat !important;

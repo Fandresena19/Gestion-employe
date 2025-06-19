@@ -131,7 +131,7 @@ $total_heures = $stats['total_heures'] ?: 0;
               FROM timesheet t 
               JOIN employer_login e ON t.matricule_emp = e.matricule_emp
               $where_clause
-              ORDER BY t.date_tache DESC";
+              ORDER BY t.id_timesheet DESC";
 
       $stmt = $bdd->prepare($sql);
       $stmt->execute($params);
@@ -165,9 +165,6 @@ $total_heures = $stats['total_heures'] ?: 0;
 </div>
 
 <style>
-  tbody tr:nth-child(even) {
-    background-color: rgb(91, 91, 91);
-  }
 
   .permission-summary {
     background-color: #6a6363bf;

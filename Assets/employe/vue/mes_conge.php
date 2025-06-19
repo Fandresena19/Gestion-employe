@@ -243,11 +243,6 @@ $nb_refuses = $stats['nb_refuses'] ?: 0;
     </div>
 </div>
 
-<!-- <style>
-    tbody tr:nth-child(even) {
-  background-color: rgb(91, 91, 91);
-}
-</style> -->
 
 <?php
 include('../other/foot.php');

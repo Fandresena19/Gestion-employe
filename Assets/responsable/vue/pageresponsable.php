@@ -37,13 +37,13 @@ if (!$user) {
     <div class="sous-contenu">
       <div class="ligne1">
         <input type="text" value="<?= 'Matricule = ' . $user['Matricule_resp'] ?>" class="input_mat" disabled />
-        <input type="text" placeholder="<?= strtoupper($user['nom_resp']) ?>" name="nom" class="input2" oninput="this.value = this.value.toUpperCase();" />
-        <input type="text" name="prenom" placeholder="<?= ucfirst(strtolower($user['prenom_resp'])) ?>" class="input2"
+        <input type="text" value="<?= strtoupper($user['nom_resp']) ?>" name="nom" class="input2" oninput="this.value = this.value.toUpperCase();" />
+        <input type="text" name="prenom" value="<?= ucfirst(strtolower($user['prenom_resp'])) ?>" class="input2"
           oninput="this.value = this.value.charAt(0).toUpperCase() + this.value.slice(1).toLowerCase();" />
       </div><br><br>
 
       <div class="ligne2">
-        <input type="mail" name="mail" placeholder="<?= $user['mail_resp'] ?>" class="input3" />
+        <input type="mail" name="mail" value="<?= $user['mail_resp'] ?>" class="input3" />
       </div><br><br>
 
       <div class="ligne3plus">
