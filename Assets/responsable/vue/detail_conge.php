@@ -215,7 +215,6 @@ if ($filtreEmploye !== 'tous') {
     border: 1px solid #ddd;
     padding: 8px;
     text-align: left;
-    color: white !important;
   }
 
   tr:hover {
@@ -305,7 +304,7 @@ if ($filtreEmploye !== 'tous') {
             </option>
           <?php endforeach; ?>
         </select>
-      </div>
+      </div><br>
       </div>
     </form>
   </div>
