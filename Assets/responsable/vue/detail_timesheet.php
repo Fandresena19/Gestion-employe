@@ -50,14 +50,14 @@ if ($moisSuivant > 12) {
   $anneeSuivante++;
 }
 
-// Vérifier si l'utilisateur est un responsable
-$estResponsable = false;
-if (isset($_SESSION['id_user']) && isset($_SESSION['role'])) {
-  $estResponsable = ($_SESSION['role'] === 'Responsable');
-}
+// Récupération des paramètres de filtrage
+$filtreEmploye = isset($_GET['employe']) ? $_GET['employe'] : 'tous';
 
-// D'abord récupérer tous les employés
+// D'abord récupérer tous les employés pour la liste déroulante
 $requeteEmployes = $bdd->query('SELECT matricule_emp, nom_emp, prenom_emp FROM employer_login ORDER BY nom_emp');
+
+// Tableau pour stocker la liste des employés (pour le select)
+$listeEmployes = [];
 
 // Tableau pour stocker les informations des employés
 $employesInfos = [];
@@ -65,28 +65,42 @@ $employesInfos = [];
 // Initialiser les données pour tous les employés
 while ($employe = $requeteEmployes->fetch(PDO::FETCH_ASSOC)) {
   $matricule = $employe['matricule_emp'];
+  $nomComplet = $employe['nom_emp'] . ' ' . $employe['prenom_emp'];
+  
+  // Pour la liste déroulante
+  $listeEmployes[$matricule] = $nomComplet;
 
   $employesInfos[$matricule] = [
-    'nom_complet' => $employe['nom_emp'] . ' ' . $employe['prenom_emp'],
+    'nom_complet' => $nomComplet,
     'total_heures' => 0,
     'nb_taches' => 0,
     'taches' => []
   ];
 }
 
-// Requête pour récupérer toutes les tâches du mois pour tous les employés
-$requeteTaches = $bdd->prepare('
+// Construire la requête pour récupérer les tâches avec filtrage optionnel
+$sql = '
     SELECT t.*, e.nom_emp, e.prenom_emp
     FROM timesheet t
     JOIN employer_login e ON e.matricule_emp = t.matricule_emp
     WHERE t.date_tache BETWEEN :debut AND :fin
-    ORDER BY e.matricule_emp, t.date_tache DESC
-');
+';
 
-$requeteTaches->execute([
+$params = [
   'debut' => $premierJourDuMois,
   'fin' => $dernierJourDuMois
-]);
+];
+
+// Ajouter le filtre par employé si nécessaire
+if ($filtreEmploye !== 'tous') {
+  $sql .= ' AND t.matricule_emp = :matricule';
+  $params['matricule'] = $filtreEmploye;
+}
+
+$sql .= ' ORDER BY e.matricule_emp, t.date_tache DESC';
+
+$requeteTaches = $bdd->prepare($sql);
+$requeteTaches->execute($params);
 
 // Compléter les informations des employés avec leurs tâches
 while ($tache = $requeteTaches->fetch(PDO::FETCH_ASSOC)) {
@@ -109,23 +123,14 @@ while ($tache = $requeteTaches->fetch(PDO::FETCH_ASSOC)) {
   }
 }
 
-// Comptage des tâches pour chaque employé dans le mois sélectionné
-foreach ($employesInfos as $matricule => &$employe) {
-  $stmt = $bdd->prepare('
-        SELECT COUNT(*) AS total, SUM(duree_tache) AS heures_totales 
-        FROM timesheet 
-        WHERE matricule_emp = :matricule AND date_tache BETWEEN :debut AND :fin
-    ');
-  $stmt->execute([
-    'matricule' => $matricule,
-    'debut' => $premierJourDuMois,
-    'fin' => $dernierJourDuMois
-  ]);
-  $result = $stmt->fetch(PDO::FETCH_ASSOC);
-  $employe['nb_taches'] = $result['total'] ?: 0;
-  $employe['total_heures'] = $result['heures_totales'] ?: 0;
-}
-unset($employe); // Détruire la référence à la dernière valeur
+// Filtrer les employés à afficher si un filtre est appliqué
+if ($filtreEmploye !== 'tous') {
+  $employesInfosFiltres = [];
+  if (isset($employesInfos[$filtreEmploye])) {
+    $employesInfosFiltres[$filtreEmploye] = $employesInfos[$filtreEmploye];
+  }
+  $employesInfos = $employesInfosFiltres;
+} 
 ?>
 
 <style>
@@ -150,6 +155,29 @@ unset($employe); // Détruire la référence à la dernière valeur
     flex-shrink: 0;
   }
 
+  .filters {
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .filter-group label {
+    font-weight: bold;
+  }
+
+  .filter-group select {
+    padding: 5px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+  }
+
   .navigation {
     display: flex;
     justify-content: space-between;
@@ -160,11 +188,17 @@ unset($employe); // Détruire la référence à la dernière valeur
     border-radius: 5px;
   }
 
-  .navigation button{
+  .navigation button {
     background-color: #6A2C82;
     border: none;
     padding: 5px 10px;
     border-radius: 5px;
+    color: white;
+    cursor: pointer;
+  }
+
+  .navigation button:hover {
+    background-color: #5a2472;
   }
 
   .mois-actuel {
@@ -249,14 +283,35 @@ unset($employe); // Détruire la référence à la dernière valeur
     </div>
   </header> <br />
 
+  <div class="filters">
+    <form action="" method="GET" id="filter-form">
+      <input type="hidden" name="mois" value="<?php echo $moisActuel; ?>">
+      <input type="hidden" name="annee" value="<?php echo $anneeActuelle; ?>">
+
+      <div class="filtre">
+        <div class="filter-group">
+          <label for="employe">Employé: </label>
+          <select name="employe" id="employe" onchange="document.getElementById('filter-form').submit()">
+            <option value="tous" <?php echo $filtreEmploye === 'tous' ? 'selected' : ''; ?>>Tous les employés</option>
+            <?php foreach ($listeEmployes as $matricule => $nom): ?>
+              <option value="<?php echo $matricule; ?>" <?php echo $filtreEmploye === $matricule ? 'selected' : ''; ?>>
+                <?php echo htmlspecialchars($nom); ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+
   <div class="navigation">
-    <a href="?mois=<?php echo $moisPrecedent; ?>&annee=<?php echo $anneePrecedente; ?>">
+    <a href="?mois=<?php echo $moisPrecedent; ?>&annee=<?php echo $anneePrecedente; ?>&employe=<?php echo urlencode($filtreEmploye); ?>">
       <button type="button">&lt; Mois précédent</button>
     </a>
     <div class="mois-actuel">
       <?php echo $nomsMois[$moisActuel] . ' ' . $anneeActuelle; ?>
     </div>
-    <a href="?mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>">
+    <a href="?mois=<?php echo $moisSuivant; ?>&annee=<?php echo $anneeSuivante; ?>&employe=<?php echo urlencode($filtreEmploye); ?>">
       <button type="button">Mois suivant &gt;</button>
     </a>
   </div>
@@ -274,7 +329,7 @@ unset($employe); // Détruire la référence à la dernière valeur
       <tbody>
         <?php foreach ($employesInfos as $matricule => $employe): ?>
           <tr class="recap-header">
-            <td><?php echo $employe['nom_complet']; ?></td>
+            <td><?php echo htmlspecialchars($employe['nom_complet']); ?></td>
             <td><?php echo $employe['nb_taches']; ?></td>
             <td><?php echo $employe['total_heures']; ?> heures</td>
             <td>
@@ -293,7 +348,7 @@ unset($employe); // Détruire la référence à la dernière valeur
       <table>
         <thead>
           <tr>
-            <th colspan="6">Détails des Tâches - <?php echo $employe['nom_complet']; ?></th>
+            <th colspan="6">Détails des Tâches - <?php echo htmlspecialchars($employe['nom_complet']); ?></th>
           </tr>
           <tr>
             <th>Tâche N°</th>
@@ -312,11 +367,11 @@ unset($employe); // Détruire la référence à la dernière valeur
           <?php else: ?>
             <?php foreach ($employe['taches'] as $tache): ?>
               <tr class="tache-row">
-                <td><?php echo $tache['id_timesheet']; ?></td>
+                <td><?php echo htmlspecialchars($tache['id_timesheet']); ?></td>
                 <td><?php echo date('d/m/Y', strtotime($tache['date_tache'])); ?></td>
-                <td><?php echo $tache['duree_tache']; ?></td>
-                <td><?php echo $tache['client']; ?></td>
-                <td><?php echo $tache['tache']; ?></td>
+                <td><?php echo htmlspecialchars($tache['duree_tache']); ?></td>
+                <td><?php echo htmlspecialchars($tache['client']); ?></td>
+                <td><?php echo htmlspecialchars($tache['tache']); ?></td>
                 <td class="tache-description" title="<?php echo htmlspecialchars($tache['description_tache']); ?>">
                   <?php echo htmlspecialchars($tache['description_tache']); ?>
                 </td>
@@ -339,5 +394,3 @@ unset($employe); // Détruire la référence à la dernière valeur
 <?php
 include('../other/foot.php');
 ?>
-
-

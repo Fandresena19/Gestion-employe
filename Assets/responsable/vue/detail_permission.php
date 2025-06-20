@@ -68,7 +68,7 @@ $listeEmployes = []; // Pour le filtre
 while ($employe = $requeteEmployes->fetch(PDO::FETCH_ASSOC)) {
   $matricule = $employe['matricule_emp'];
   $nomComplet = $employe['nom_emp'] . ' ' . $employe['prenom_emp'];
-  
+
   $listeEmployes[$matricule] = $nomComplet;
 
   $employesInfos[$matricule] = [
@@ -395,30 +395,30 @@ if ($filtreEmploye !== 'tous') {
     <form method="GET" action="" id="filtre-form">
       <input type="hidden" name="mois" value="<?php echo $moisActuel; ?>">
       <input type="hidden" name="annee" value="<?php echo $anneeActuelle; ?>">
-      
-<div class="filtre">
-<div class="filter-group">
-        <label for="statut">Statut:</label>
-        <select name="statut" id="statut" onchange="document.getElementById('filtre-form').submit()">
-          <option value="tous" <?php echo $filtreStatut === 'tous' ? 'selected' : ''; ?>>Tous les statuts</option>
-          <option value="Validé" <?php echo $filtreStatut === 'Validé' ? 'selected' : ''; ?>>Validé</option>
-          <option value="En attente" <?php echo $filtreStatut === 'En attente' ? 'selected' : ''; ?>>En attente</option>
-          <option value="Refusé" <?php echo $filtreStatut === 'Refusé' ? 'selected' : ''; ?>>Refusé</option>
-        </select>
-      </div>
 
-      <div class="filter-group">
-        <label for="employe">Employé:</label>
-        <select name="employe" id="employe" onchange="document.getElementById('filtre-form').submit()">
-          <option value="tous" <?php echo $filtreEmploye === 'tous' ? 'selected' : ''; ?>>Tous les employés</option>
-          <?php foreach ($listeEmployes as $matricule => $nom): ?>
-            <option value="<?php echo $matricule; ?>" <?php echo $filtreEmploye === $matricule ? 'selected' : ''; ?>>
-              <?php echo $nom; ?>
-            </option>
-          <?php endforeach; ?>
-        </select>
+      <div class="filtre">
+        <div class="filter-group">
+          <label for="statut">Statut:</label>
+          <select name="statut" id="statut" onchange="document.getElementById('filtre-form').submit()">
+            <option value="tous" <?php echo $filtreStatut === 'tous' ? 'selected' : ''; ?>>Tous les statuts</option>
+            <option value="Validé" <?php echo $filtreStatut === 'Validé' ? 'selected' : ''; ?>>Validé</option>
+            <option value="En attente" <?php echo $filtreStatut === 'En attente' ? 'selected' : ''; ?>>En attente</option>
+            <option value="Refusé" <?php echo $filtreStatut === 'Refusé' ? 'selected' : ''; ?>>Refusé</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="employe">Employé:</label>
+          <select name="employe" id="employe" onchange="document.getElementById('filtre-form').submit()">
+            <option value="tous" <?php echo $filtreEmploye === 'tous' ? 'selected' : ''; ?>>Tous les employés</option>
+            <?php foreach ($listeEmployes as $matricule => $nom): ?>
+              <option value="<?php echo $matricule; ?>" <?php echo $filtreEmploye === $matricule ? 'selected' : ''; ?>>
+                <?php echo $nom; ?>
+              </option>
+            <?php endforeach; ?>
+          </select>
+        </div>
       </div>
-</div>
     </form>
   </div>
 
@@ -489,18 +489,20 @@ if ($filtreEmploye !== 'tous') {
 </div>
 
 <style>
-  .filtre{
+  .filtre {
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
   }
+
   /* Specific styles for select elements to make background darker */
   select {
     background-color: #2c2c2c !important;
     color: white !important;
     max-width: 150px;
-    appearance: none !important; /* Remove default browser styling */
-    background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%)  !important;
+    appearance: none !important;
+    /* Remove default browser styling */
+    background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%) !important;
     background-position: calc(100% - 20px) calc(1em + 2px), calc(100% - 15px) calc(1em + 2px) !important;
     background-size: 5px 5px, 5px 5px !important;
     background-repeat: no-repeat !important;
@@ -511,7 +513,6 @@ if ($filtreEmploye !== 'tous') {
     outline: none !important;
     box-shadow: 0 0 5px rgba(81, 203, 238, 1) !important;
   }
-
 </style>
 <?php
 include('../other/foot.php');
