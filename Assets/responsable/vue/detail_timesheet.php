@@ -138,7 +138,6 @@ if ($filtreEmploye !== 'tous') {
   body {
     height: 100%;
     margin: 0;
-    overflow: hidden;
   }
 
   .contenu {
@@ -278,8 +277,11 @@ if ($filtreEmploye !== 'tous') {
 
 <div class="contenu">
   <header>
-    <div class="header-actions">
-      <h4>Détails des Tâches</h4>
+    <div class="header-actions" style="display: flex; justify-content: space-between;">
+      <div><h4>Détails des Tâches</h4></div>
+      <div>
+        <a href="../traitement/download.php">Télecharger pdf</a>
+      </div>
     </div>
   </header> <br />
 
