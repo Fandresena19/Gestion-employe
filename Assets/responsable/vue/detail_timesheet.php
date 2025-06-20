@@ -277,10 +277,10 @@ if ($filtreEmploye !== 'tous') {
 
 <div class="contenu">
   <header>
-    <div class="header-actions" style="display: flex; justify-content: space-between;">
+    <div class="header-actions">
       <div><h4>Détails des Tâches</h4></div>
-      <div>
-        <a href="../traitement/download.php">Télecharger pdf</a>
+      <div class="bouton">
+        <a href="../traitement/download.php"><button>Télécharger le pdf</button></a>
       </div>
     </div>
   </header> <br />
