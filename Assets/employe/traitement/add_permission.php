@@ -94,6 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ]);
 
   if ($result) {
+    require_once './sendMail.php';
     //calcule solde restant après demande
     $soldeApres = $restePermission - $dureeAbsenceDemandee;
     $soldeJours = floor($soldeApres);
@@ -113,12 +114,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       'Statut_notif_resp' => 'non lu'
     ]);
 
+
+    $sql_message = "SELECT message_resp FROM notifications_responsable 
+    WHERE matricule_emp = :matricule_emp AND type = 'Permission' ORDER BY date_notif_resp DESC LIMIT 1";
+    $stm_mes = $bdd->prepare($sql_message);
+    $stm_mes->execute(['matricule_emp' => $matricule_emp]);
+    $message_data = $stm_mes->fetch(PDO::FETCH_ASSOC);
+
+    if ($message_data) {
+      EnvoiMail($mail, $message_data['message_resp']);
+    }
+
     $_SESSION['success'] = "Votre demande de permission de $dureeAbsenceJ jours $dureeAbsenceH heures a été soumise avec succès. Il vous restera $soldeJours jours $soldeHeures heures de permission disponible si cette demande est validée.";
     header('Location: ../vue/mes_permission.php');
     exit();
   } else {
 
-    $_SESSION['success'] = "Une erreur s'est produite lors de la soumission de votre demande.";
+    $_SESSION['error'] = "Une erreur s'est produite lors de la soumission de votre demande.";
     header('Location: ../vue/permission.php');
     exit();
     

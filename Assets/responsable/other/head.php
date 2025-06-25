@@ -97,7 +97,7 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
               </span>
 
               <div class="text header-text">
-                <span class="employe">Employé</span>
+                <span class="employe" style="font-size: 1.5rem;">Responsable</span>
               </div>
             </div>
 

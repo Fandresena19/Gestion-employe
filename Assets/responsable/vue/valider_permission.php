@@ -32,10 +32,10 @@
 
         if (isset($_POST['valider'])) {
             $statut = 'Validé';
-            $type = 'Validé'; //Type de notification (succès)
+            $type = 'Validée'; //Type de notification (succès)
         } elseif (isset($_POST['refuser'])) {
             $statut = 'Refusé';
-            $type = 'Refusé'; //Type de notification (erreur)
+            $type = 'Refusée'; //Type de notification (erreur)
         }
 
         $sql = "UPDATE permission SET Statut_permission = :statut, message = :message WHERE id_permission = :id_permission";
@@ -52,7 +52,7 @@
             $stmt_notif->execute([
                 'Genre' => "Permission",
                 'Matricule_emp' => $Matricule_emp,
-                'message' => $message,
+                'message' => "Votre Permission est " . $type . " avec ce remarque: \"" . $message . "\"",
                 'type' => $type
             ]);
 

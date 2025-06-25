@@ -55,7 +55,7 @@
             $stmt_notif->execute([
                 'Genre' => 'Congé',
                 'Matricule_emp' => $Matricule_emp,
-                'message' => $message,
+                'message' => "Votre Congé est " . $type . " avec ce remarque: \"" . $message . "\"",
                 'type' => $type
             ]);
 
