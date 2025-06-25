@@ -98,7 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   ]);
 
   if ($result) {
-    require_once './sendMail.php';
+    require_once '../traitement/sendMail.php';
     // Calculer le solde restant après cette demande
     $soldeApres = $resteConge - $dureeAbsenceDemandee;
     $soldeJours = floor($soldeApres);
