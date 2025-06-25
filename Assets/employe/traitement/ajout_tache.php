@@ -6,6 +6,7 @@ require_once('../other/bd.php');
 // Vérifier si le formulaire a été soumis
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
+        require_once './sendMail.php';
         // Récupérer les données du formulaire
         $matricule_emp = $_POST['matricule_emp'];
         $date_tache = $_POST['date_tache'];
@@ -28,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 VALUES (:matricule_emp, :tache, :date_tache, :duree_tache, :client, :mission, :description_tache, :note)";
 
         $stmt = $bdd->prepare($sql);
-        $stmt->execute([
+        $result = $stmt->execute([
             'matricule_emp' => $matricule_emp,
             'tache' => $tache,
             'date_tache' => $date_tache,
@@ -39,6 +40,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'note' => $note
         ]);
 
+       if($result){
         $emp = $bdd->query("SELECT * FROM employer_login 
         WHERE matricule_emp = $matricule_emp")->fetch(PDO::FETCH_ASSOC);
 
@@ -53,10 +55,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'Statut_notif_resp' => 'non lu'
         ]);
 
+        $sql_message = "SELECT message_resp FROM notifications_responsable 
+        WHERE matricule_emp = :matricule_emp AND type = 'Timesheet' ORDER BY date_notif_resp DESC LIMIT 1";
+        $stm_mes = $bdd->prepare($sql_message);
+        $stm_mes->execute(['matricule_emp' => $matricule_emp]);
+        $message_data = $stm_mes->fetch(PDO::FETCH_ASSOC);
+
+        if ($message_data) {
+            EnvoiMail($mail, $message_data['message_resp']);
+        }
+
         // Rediriger avec un message de succès
         $_SESSION['success'] = "La tâche a été enregistrée avec succès.";
         header('Location: ../vue/mes_timesheet.php');
         exit();
+       }
     } catch (PDOException $e) {
         // En cas d'erreur, rediriger avec un message d'erreur
         $_SESSION['error'] = "Erreur lors de l'enregistrement de la tâche: " . $e->getMessage();

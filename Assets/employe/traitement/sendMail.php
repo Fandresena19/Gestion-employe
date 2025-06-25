@@ -29,6 +29,7 @@ function EnvoiMail($mail, $message) {
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->CharSet = 'UTF-8'; // Définir l'encodage UTF-8
     $mail->Subject = 'Message de l\'application de gestion des employés';
     $mail->Body    = '<b>'.$message.'</b>';
     $mail->AltBody = $message;
