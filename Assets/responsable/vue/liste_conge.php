@@ -300,5 +300,49 @@ $donnees->execute($params);
 </script>
 
 <?php
+if (isset($_SESSION['Matricule_resp'])) {
+  require_once('../traitement/debut.php');
+
+  $date_du_jour = date('Y-m-d');
+
+  // 📧 TRAITEMENT DES CONGÉS (seulement ceux pas encore envoyés)
+  $sql = "SELECT c.id_conge, c.date_debut, c.date_fin, e.nom_emp AS nom_emp, e.prenom_emp AS prenom_emp
+          FROM conge c
+          JOIN employer_login e ON c.matricule_emp = e.matricule_emp
+          WHERE c.date_debut = ? AND c.statut_conge = 'Validé' AND c.email_envoye = 0";
+  $stmt = $bdd->prepare($sql);
+  $stmt->execute([$date_du_jour]);
+  $conges = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  if ($conges) {
+    foreach ($conges as $conge) {
+      $nom = $conge['nom_emp'];
+      $prenom = $conge['prenom_emp'];
+      $date_debut = $conge['date_debut'];
+      $nom_complet = $nom . ' ' . $prenom;
+
+      // Envoi de l'email
+      $email_envoye = envoyerEmail($nom_complet, $date_debut, 'Congé');
+      
+      if ($email_envoye) {
+        // Mettre à jour le statut de l'email envoyé pour ce congé spécifique
+        $update_sql = "UPDATE conge SET email_envoye = 1 WHERE id_conge = ?";
+        $update_stmt = $bdd->prepare($update_sql);
+        $update_stmt->execute([$conge['id_conge']]);
+        
+        if ($update_stmt->rowCount() > 0) {
+          echo "Email envoyé et statut mis à jour avec succès pour " . $nom_complet . "<br>";
+        } else {
+          echo "Email envoyé mais échec de la mise à jour du statut pour " . $nom_complet . "<br>";
+        }
+      } else {
+        echo "Échec de l'envoi de l'email pour " . $nom_complet . "<br>";
+      }
+    }
+  } else {
+    // Pas de message si aucun congé à traiter
+  }
+}
+
 include('../other/foot.php');
 ?>

@@ -45,7 +45,7 @@ $donnees = $bdd->query('select * from employer_login e join permission p on e.ma
 </style>
 
 <?php
-  // Afficher le message de succès s'il existe
+// Afficher le message de succès s'il existe
 if (isset($_SESSION['success_message'])) {
   echo '<div class="alert alert-success">' . $_SESSION['success_message'] . '</div>';
   unset($_SESSION['success_message']);
@@ -68,37 +68,37 @@ $fin_consom = isset($_GET['fin']) ? $_GET['fin'] : '';
 
 // Message d'erreur pour les dates personnalisées non remplies
 $error_message = '';
-if ($filtrer == 'consom' && (empty($debut_consom) || empty($fin_consom))){
+if ($filtrer == 'consom' && (empty($debut_consom) || empty($fin_consom))) {
   $error_message = "veuillez remplir les deux dates pour le filtre personnalisé.";
   $filtrer = 'mois_courant';
 }
 
 //Préparation de la clause WHERE en fonction du filtre
-$where_clause ="WHERE 1=1";
+$where_clause = "WHERE 1=1";
 $params = [];
 
-if ($filtrer == 'mois_courant'){
+if ($filtrer == 'mois_courant') {
   $where_clause .= " AND MONTH(p.date_demande_per) = YEAR(CURRENT_DATE())";
   $period_text = "du mois courant";
-}elseif($filtrer == 'mois_dernier'){
+} elseif ($filtrer == 'mois_dernier') {
   $where_clause .= " AND MONTH(p.date_demande_per) = MONTH(CURRENT_DATE(), INTERVAL 1 MONTH))
-                    AND YEAR(p.date_demande_per) = YEAR(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH))";   
-  $period_text = "du mois dernier"; 
-}elseif ($filtrer == 'semaine_derniere'){
+                    AND YEAR(p.date_demande_per) = YEAR(DATE_SUB(CURRENT_DATE(), INTERVAL 1 MONTH))";
+  $period_text = "du mois dernier";
+} elseif ($filtrer == 'semaine_derniere') {
   $where_clause .= " AND YEADWEEK(p.date_demande_per, 1) = YEARWEEK(DATE_SUB(CURRENT_DATE(), INTERVAL 1 WEEK), 1)";
   $period_text = "de la semaine dernière";
-}elseif($filtrer == 'annee_courante'){
+} elseif ($filtrer == 'annee_courante') {
   $where_clause .= " AND YEAR(p.date_demande_per) = YEAR(CURRENT_DATE())";
   $period_text = "de l'année courante";
-}elseif ($filtrer == 'consom' && !empty($debut_consom) && !empty($fin_consom)){
+} elseif ($filtrer == 'consom' && !empty($debut_consom) && !empty($fin_consom)) {
   $where_clause .= " AND p.date_demande_per BETWEEN :debut_date AND :fin_date";
   $params = [
     ':debut_date' => $debut_consom,
     ':fin_date' => $fin_consom
   ];
-  $period_text = "du " .date('d/m/Y',strtotime($debut_consom)) 
-  . " au " .date('d/m/Y', strtotime($fin_consom));
-}else{
+  $period_text = "du " . date('d/m/Y', strtotime($debut_consom))
+    . " au " . date('d/m/Y', strtotime($fin_consom));
+} else {
   $period_text = "de tous les permissions";
 }
 
@@ -135,7 +135,7 @@ $total_heures_periode = $totaux['total_heures'] ?: 0;
 
 //Préparer la requête principale avec limite si pas de filtre spécifique
 $limit_clause = '';
-if($filtrer == 'mois_courant' && empty($_GET['show_all'])){
+if ($filtrer == 'mois_courant' && empty($_GET['show_all'])) {
   $limit_clause = "LIMIT 10"; // Afficher les 10 derniers permissions
 }
 
@@ -153,35 +153,35 @@ $donnees->execute($params);
 </div><br>
 
 <?php if (!empty($error_message)): ?>
-    <div class="error-message">
-        <?php echo $error_message; ?>
-    </div>
+  <div class="error-message">
+    <?php echo $error_message; ?>
+  </div>
 <?php endif; ?>
 
 <div class="conge-summary">
-    <h4>Statistiques des congés <?php echo $period_text; ?></h4>
-    <div class="conge-detail">
-        <div class="conge-item total">
-            <strong>Total Congés</strong>
-            <p><?php echo $nb_permission; ?> demandes</p>
-        </div>
-        <div class="conge-item quota">
-            <strong>Congés Validés</strong>
-            <p><?php echo $nb_valides; ?> demandes</p>
-        </div>
-        <div class="conge-item taken">
-            <strong>Congés Refusés</strong>
-            <p><?php echo $nb_refuses; ?> demandes</p>
-        </div>
-        <div class="conge-item remaining">
-            <strong>En Attente</strong>
-            <p><?php echo $nb_en_attente; ?> demandes</p>
-        </div>
-        <div class="conge-item total">
-            <strong>Jours Validés</strong>
-            <p><?php echo $total_jours_periode; ?> jours, <?php echo $total_heures_periode; ?> heures</p>
-        </div>
+  <h4>Statistiques des congés <?php echo $period_text; ?></h4>
+  <div class="conge-detail">
+    <div class="conge-item total">
+      <strong>Total Congés</strong>
+      <p><?php echo $nb_permission; ?> demandes</p>
     </div>
+    <div class="conge-item quota">
+      <strong>Congés Validés</strong>
+      <p><?php echo $nb_valides; ?> demandes</p>
+    </div>
+    <div class="conge-item taken">
+      <strong>Congés Refusés</strong>
+      <p><?php echo $nb_refuses; ?> demandes</p>
+    </div>
+    <div class="conge-item remaining">
+      <strong>En Attente</strong>
+      <p><?php echo $nb_en_attente; ?> demandes</p>
+    </div>
+    <div class="conge-item total">
+      <strong>Jours Validés</strong>
+      <p><?php echo $total_jours_periode; ?> jours, <?php echo $total_heures_periode; ?> heures</p>
+    </div>
+  </div>
 </div>
 
 <div class="contenu">
@@ -258,22 +258,67 @@ $donnees->execute($params);
 </div>
 
 <script>
-    function confirmDelete(event, url) {
-      event.preventDefault(); // Empêche le lien de se comporter comme un lien normal
+  function confirmDelete(event, url) {
+    event.preventDefault(); // Empêche le lien de se comporter comme un lien normal
 
-      // Affiche le modal
-      document.getElementById('confirmationModal').style.display = 'block';
+    // Affiche le modal
+    document.getElementById('confirmationModal').style.display = 'block';
 
-      // Gestion de la confirmation
-      document.getElementById('confirmDelete').onclick = function() {
-        window.location.href = url; // Redirige vers l'URL de suppression
-      };
+    // Gestion de la confirmation
+    document.getElementById('confirmDelete').onclick = function() {
+      window.location.href = url; // Redirige vers l'URL de suppression
+    };
 
-      // Gestion de l'annulation
-      document.getElementById('cancelDelete').onclick = function() {
-        document.getElementById('confirmationModal').style.display = 'none'; // Cache le modal
-      };
+    // Gestion de l'annulation
+    document.getElementById('cancelDelete').onclick = function() {
+      document.getElementById('confirmationModal').style.display = 'none'; // Cache le modal
+    };
+  }
+</script>
+
+<?php
+if (isset($_SESSION['Matricule_resp'])) {
+  require_once('../traitement/debut.php');
+  $date_du_jour = date('Y-m-d');
+  
+  // 📧 TRAITEMENT DES PERMISSIONS (seulement celles pas encore envoyées)
+  $sql = "SELECT p.id_permission, p.date_debut_per, p.date_fin_per, e.nom_emp AS nom_emp, e.prenom_emp AS prenom_emp
+          FROM permission p
+          JOIN employer_login e ON p.matricule_emp = e.matricule_emp
+          WHERE p.date_debut_per = ? AND p.Statut_permission = 'Validé' AND p.email_envoye = 0";
+  $stmt = $bdd->prepare($sql);
+  $stmt->execute([$date_du_jour]);
+  $perms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  if ($perms) {
+    foreach ($perms as $perm) {
+      $nom = $perm['nom_emp'];
+      $prenom = $perm['prenom_emp'];
+      $date_debut = $perm['date_debut_per'];
+      $nom_complet = $nom . ' ' . $prenom;
+
+      // Envoi de l'email
+      $email_envoye = envoyerEmail($nom_complet, $date_debut, 'Permission');
+      
+      if ($email_envoye) {
+        // Mise à jour de la table permission pour cette permission spécifique
+        $update_sql = "UPDATE permission SET email_envoye = 1 WHERE id_permission = ?";
+        $update_stmt = $bdd->prepare($update_sql);
+        $update_stmt->execute([$perm['id_permission']]);
+        
+        if ($update_stmt->rowCount() > 0) {
+          echo "Email envoyé et statut mis à jour avec succès pour " . $nom_complet . "<br>";
+        } else {
+          echo "Email envoyé mais échec de la mise à jour du statut pour " . $nom_complet . "<br>";
+        }
+      } else {
+        echo "Échec de l'envoi de l'email pour " . $nom_complet . "<br>";
+      }
     }
-  </script>
+  } else {
+    // Pas de message si aucune permission à traiter
+  }
+}
 
-  <?php include('../other/foot.php');?>
+include('../other/foot.php');
+?>

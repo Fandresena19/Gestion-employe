@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtn = $bdd->prepare($notif);
         $result_notif = $stmtn->execute([
             'matricule_emp' => $matricule_emp,
-            'message' => "L'employé " . $emp['nom_emp'] . " " . $emp['prenom_emp'] . "a soumis une timesheet",
+            'message' => "L'employé " . $emp['nom_emp'] . " " . $emp['prenom_emp'] . "a soumis une tâche finie",
             'date_notif_resp' => $date_tache,
             'Statut_notif_resp' => 'non lu'
         ]);

@@ -52,7 +52,7 @@
             $stmt_notif->execute([
                 'Genre' => "Permission",
                 'Matricule_emp' => $Matricule_emp,
-                'message' => "Votre Permission est " . $type . " avec ce remarque: \"" . $message . "\"",
+                'message' => "Votre Permission est " . $type . " avec cette remarque: \"" . $message . "\"",
                 'type' => $type
             ]);
 
@@ -62,10 +62,40 @@
                 echo "Erreur lors de l'ajout de la notification";
             }
 
-            header('location:./liste_absent_perm.php'); // Redirection vers la page de liste
             exit();
         } else {
             echo "Erreur lors de la mise à jour du permis9464sion.";
+        }
+    }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
+        require_once('../traitement/sendMail.php');
+        $sql_mes = "SELECT p.date_debut_per, p.date_fin_per, n.Type, n.Message, e.mail_emp
+        FROM permission p JOIN employer_login e ON e.Matricule_emp = p.Matricule_emp
+        JOIN notifications n ON n.Matricule_emp = e.Matricule_emp WHERE p.id_permission = :id_permission AND Genre = 'Permission' ORDER BY date_notif DESC LIMIT 1";
+        $stmt_mes = $bdd->prepare($sql_mes);
+        $stmt_mes->execute(['id_permission' => $id_permission]);
+        // Récupération du message
+        $message_data = $stmt_mes->fetch(PDO::FETCH_ASSOC);
+        if ($message_data) {
+            $email = $message_data['mail_emp'];
+            $date_debut = $message_data['date_debut_per'];
+            $date_fin = $message_data['date_fin_per'];
+            $type = $message_data['Type'];
+            $message = $message_data['Message'];
+        
+            // Préparer le contenu de l'e-mail
+            $subject = "Notification de votre permission";
+            $body = "
+                <p>Bonjour,</p>
+                <p>Votre permission du <strong>$date_debut</strong> au <strong>$date_fin</strong> est <strong>$type</strong>.</p>
+                <p>$message</p>
+            ";
+        
+            // Envoi de l’e-mail
+            EnvoiMail($email, $subject, $body);
+
+            header('location:./liste_permission.php'); // Redirection vers la page de liste
         }
     }
     ?>
