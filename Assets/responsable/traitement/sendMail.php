@@ -19,15 +19,15 @@ function EnvoiMail($mail, $subject, $body) {
         $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
         $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
         $mail->Username   = 'fandresenaandrinirina@gmail.com';                     //SMTP username
-        $mail->Password   = 'ydgsvnkyzkrxquyt';                               //SMTP password (utilisez un mot de passe d'application)
+        $mail->Password   = '';                               //SMTP password (utilisez un mot de passe d'application)
         $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
         $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
         //Recipients
         $mail->CharSet = 'UTF-8'; // Définir l'encodage UTF-8
         $mail->setFrom('fandresenaandrinirina@gmail.com', 'MESSAGE APPLICATION DE GESTION EMPLOYE');
-        $mail->addAddress('inf@srays.org', 'Employé');     //Add a recipient
-        $mail->addCC('fandresenaandry14@gmail.com', 'Manager');
+        $mail->addAddress('inf@srays.org', 'Employé');     //Mail de l'employé
+        $mail->addCC('fandresenaandry14@gmail.com', 'Manager'); //Manager en copie lors de validation ou refus 
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML
