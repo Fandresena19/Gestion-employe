@@ -33,6 +33,7 @@ $stmt_notif = $bdd->prepare($sql_notif);
 $stmt_notif->execute();
 $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
 
+
 ?>
 
 <!DOCTYPE html>

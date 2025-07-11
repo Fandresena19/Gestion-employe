@@ -62,6 +62,34 @@
 
             if ($stmt_notif->rowCount() > 0) {
                 echo "Notification ajoutée";
+                require_once('../traitement/sendMail.php');
+                $sql_mes = "SELECT c.date_debut, c.date_fin, n.Type, n.Message, e.mail_emp
+                FROM conge c JOIN employer_login e ON e.Matricule_emp = c.Matricule_emp
+                JOIN notifications n ON n.Matricule_emp = e.Matricule_emp WHERE c.id_conge = :id_conge AND Genre = 'Congé' ORDER BY date_notif DESC LIMIT 1";
+                $stmt_mes = $bdd->prepare($sql_mes);
+                $stmt_mes->execute(['id_conge' => $id_conge]);
+                
+                // Récupération du message
+                $message_data = $stmt_mes->fetch(PDO::FETCH_ASSOC);
+                if ($message_data) {
+                    $email = $message_data['mail_emp'];
+                    $date_debut = $message_data['date_debut'];
+                    $date_fin = $message_data['date_fin'];
+                    $type = $message_data['Type'];
+                    $message = $message_data['Message'];
+                
+                    // Préparer le contenu de l'e-mail
+                    $subject = "Notification de votre congé";
+                    $body = "
+                        <p>Bonjour,</p>
+                        <p>Votre congé du <strong>$date_debut</strong> au <strong>$date_fin</strong> est <strong>$type</strong>.</p>
+                        <p>$message</p>
+                    ";
+                
+                    // Envoi de l’e-mail
+                    EnvoiMail($mail, $subject, $body);
+                    header('location:./liste_conge.php'); // Redirection vers la page de liste
+                }
             } else {
                 echo "Erreur lors de l'ajout de la notification";
                 // Ajoutez ici un code de debug pour afficher l'erreur SQL
@@ -74,36 +102,6 @@
         }
     }
 
-    if ($_SERVER['REQUEST_METHOD'] === 'POST'){
-        require_once('../traitement/sendMail.php');
-        $sql_mes = "SELECT c.date_debut, c.date_fin, n.Type, n.Message, e.mail_emp
-        FROM conge c JOIN employer_login e ON e.Matricule_emp = c.Matricule_emp
-        JOIN notifications n ON n.Matricule_emp = e.Matricule_emp WHERE c.id_conge = :id_conge AND Genre = 'Congé' ORDER BY date_notif DESC LIMIT 1";
-        $stmt_mes = $bdd->prepare($sql_mes);
-        $stmt_mes->execute(['id_conge' => $id_conge]);
-        
-        // Récupération du message
-        $message_data = $stmt_mes->fetch(PDO::FETCH_ASSOC);
-        if ($message_data) {
-            $email = $message_data['mail_emp'];
-            $date_debut = $message_data['date_debut'];
-            $date_fin = $message_data['date_fin'];
-            $type = $message_data['Type'];
-            $message = $message_data['Message'];
-        
-            // Préparer le contenu de l'e-mail
-            $subject = "Notification de votre congé";
-            $body = "
-                <p>Bonjour,</p>
-                <p>Votre congé du <strong>$date_debut</strong> au <strong>$date_fin</strong> est <strong>$type</strong>.</p>
-                <p>$message</p>
-            ";
-        
-            // Envoi de l’e-mail
-            EnvoiMail($mail, $subject, $body);
-            header('location:./liste_conge.php'); // Redirection vers la page de liste
-        }
-    }
     ?>
 
 

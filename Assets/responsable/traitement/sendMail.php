@@ -27,7 +27,7 @@ function EnvoiMail($mail, $subject, $body) {
         $mail->CharSet = 'UTF-8'; // Définir l'encodage UTF-8
         $mail->setFrom('fandresenaandrinirina@gmail.com', 'MESSAGE APPLICATION DE GESTION EMPLOYE');
         $mail->addAddress('inf@srays.org', 'Employé');     //Add a recipient
-        $mail->addCC('fandresenaandry14@gmail.com');
+        $mail->addCC('fandresenaandry14@gmail.com', 'Manager');
 
         //Content
         $mail->isHTML(true);                                  //Set email format to HTML

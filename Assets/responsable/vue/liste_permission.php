@@ -277,48 +277,48 @@ $donnees->execute($params);
 </script>
 
 <?php
-if (isset($_SESSION['Matricule_resp'])) {
-  require_once('../traitement/debut.php');
-  $date_du_jour = date('Y-m-d');
+// if (isset($_SESSION['Matricule_resp'])) {
+//   require_once('../traitement/debut.php');
+//   $date_du_jour = date('Y-m-d');
   
-  // 📧 TRAITEMENT DES PERMISSIONS (seulement celles pas encore envoyées)
-  $sql = "SELECT p.id_permission, p.date_debut_per, p.date_fin_per, e.nom_emp AS nom_emp, e.prenom_emp AS prenom_emp
-          FROM permission p
-          JOIN employer_login e ON p.matricule_emp = e.matricule_emp
-          WHERE p.date_debut_per = ? AND p.Statut_permission = 'Validé' AND p.email_envoye = 0";
-  $stmt = $bdd->prepare($sql);
-  $stmt->execute([$date_du_jour]);
-  $perms = $stmt->fetchAll(PDO::FETCH_ASSOC);
+//   // 📧 TRAITEMENT DES PERMISSIONS (seulement celles pas encore envoyées)
+//   $sql = "SELECT p.id_permission, p.date_debut_per, p.date_fin_per, e.nom_emp AS nom_emp, e.prenom_emp AS prenom_emp
+//           FROM permission p
+//           JOIN employer_login e ON p.matricule_emp = e.matricule_emp
+//           WHERE p.date_debut_per = ? AND p.Statut_permission = 'Validé' AND p.email_envoye = 0";
+//   $stmt = $bdd->prepare($sql);
+//   $stmt->execute([$date_du_jour]);
+//   $perms = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-  if ($perms) {
-    foreach ($perms as $perm) {
-      $nom = $perm['nom_emp'];
-      $prenom = $perm['prenom_emp'];
-      $date_debut = $perm['date_debut_per'];
-      $nom_complet = $nom . ' ' . $prenom;
+//   if ($perms) {
+//     foreach ($perms as $perm) {
+//       $nom = $perm['nom_emp'];
+//       $prenom = $perm['prenom_emp'];
+//       $date_debut = $perm['date_debut_per'];
+//       $nom_complet = $nom . ' ' . $prenom;
 
-      // Envoi de l'email
-      $email_envoye = envoyerEmail($nom_complet, $date_debut, 'Permission');
+//       // Envoi de l'email
+//       $email_envoye = envoyerEmail($nom_complet, $date_debut, 'Permission');
       
-      if ($email_envoye) {
-        // Mise à jour de la table permission pour cette permission spécifique
-        $update_sql = "UPDATE permission SET email_envoye = 1 WHERE id_permission = ?";
-        $update_stmt = $bdd->prepare($update_sql);
-        $update_stmt->execute([$perm['id_permission']]);
+//       if ($email_envoye) {
+//         // Mise à jour de la table permission pour cette permission spécifique
+//         $update_sql = "UPDATE permission SET email_envoye = 1 WHERE id_permission = ?";
+//         $update_stmt = $bdd->prepare($update_sql);
+//         $update_stmt->execute([$perm['id_permission']]);
         
-        if ($update_stmt->rowCount() > 0) {
-          echo "Email envoyé et statut mis à jour avec succès pour " . $nom_complet . "<br>";
-        } else {
-          echo "Email envoyé mais échec de la mise à jour du statut pour " . $nom_complet . "<br>";
-        }
-      } else {
-        echo "Échec de l'envoi de l'email pour " . $nom_complet . "<br>";
-      }
-    }
-  } else {
-    // Pas de message si aucune permission à traiter
-  }
-}
+//         if ($update_stmt->rowCount() > 0) {
+//           echo "Email envoyé et statut mis à jour avec succès pour " . $nom_complet . "<br>";
+//         } else {
+//           echo "Email envoyé mais échec de la mise à jour du statut pour " . $nom_complet . "<br>";
+//         }
+//       } else {
+//         echo "Échec de l'envoi de l'email pour " . $nom_complet . "<br>";
+//       }
+//     }
+//   } else {
+//     // Pas de message si aucune permission à traiter
+//   }
+// }
 
 include('../other/foot.php');
 ?>
