@@ -67,7 +67,7 @@
 
 
         <div id="login_btn">
-          <button type="Submit">Connecte</button>
+          <button type="Submit">Se connecte</button>
         </div>
 
       </form>

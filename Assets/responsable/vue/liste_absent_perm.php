@@ -27,7 +27,7 @@
 
           <thead>
             <tr>
-              <td>Matricule</td>
+              <td>Permission N°</td>
               <td>Nom complet</td>
               <td>Date debut</td>
               <td>Date Fin</td>
@@ -40,7 +40,7 @@
             while ($data = $donnees->fetch()) {
 
               echo '<tr>
-                <td>' . $data['matricule_emp'] . '</td>
+                <td>' . $data['id_permission'] . '</td>
                 <td>' . $data['nom_emp'] . ' ' . $data['prenom_emp'] . '</td>
                 
                 <td>' . date('d/m/Y H:i:s', strtotime($data['date_debut_per'])). '</td>

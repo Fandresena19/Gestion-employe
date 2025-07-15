@@ -136,7 +136,7 @@ $total_notifications = count($conges_actuels) + count($permissions_actuelles);
     padding: 0 20px;
   }
   
-  .notification-item {
+  .notification-items {
     background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
     padding: 15px;
@@ -147,7 +147,7 @@ $total_notifications = count($conges_actuels) + count($permissions_actuelles);
     transform: translateY(0);
   }
   
-  .notification-item:hover {
+  .notification-items:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
   }
@@ -306,7 +306,7 @@ $total_notifications = count($conges_actuels) + count($permissions_actuelles);
     <?php if ($total_notifications > 0): ?>
       <!-- Notifications de congés -->
       <?php foreach ($conges_actuels as $conge): ?>
-        <div class="notification-item notification-conge">
+        <div class="notification-items notification-conge">
           <div class="notification-content">
             <div class="notification-text">
               <p>
@@ -335,7 +335,7 @@ $total_notifications = count($conges_actuels) + count($permissions_actuelles);
       
       <!-- Notifications de permissions -->
       <?php foreach ($permissions_actuelles as $permission): ?>
-        <div class="notification-item notification-permission">
+        <div class="notification-items notification-permission">
           <div class="notification-content">
             <div class="notification-text">
               <p>

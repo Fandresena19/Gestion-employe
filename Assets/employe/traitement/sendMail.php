@@ -18,14 +18,14 @@ function EnvoiMail($mail, $message) {
     $mail->isSMTP();                                            //Send using SMTP
     $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
     $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'fandresenaandrinirina@gmail.com';                     //SMTP username
-    $mail->Password   = 'ydgsvnkyzkrxquyt';                               //SMTP password
+    $mail->Username   = 'Mail@gmail.com';                     //SMTP username
+    $mail->Password   = 'mot de passe';                               //SMTP password
     $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
     $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
 
     //Recipients
-    $mail->setFrom('fandresenaandrinirina@gmail.com', 'MESSAGE APPLICATION DE GESTION EMPLOYE');
-    $mail->addAddress('fandresenaandry14@gmail.com', 'Responsable');     //Add a recipient //changer en manager@srays.org
+    $mail->setFrom('Votre mail', 'MESSAGE APPLICATION DE GESTION EMPLOYE');
+    $mail->addAddress('Reception', 'Responsable');     //Add a recipient //changer en manager@srays.org
 
     //Content
     $mail->isHTML(true);                                  //Set email format to HTML
