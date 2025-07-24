@@ -15,7 +15,6 @@
 
 <body id="login_body">
 
-
   <div class="container-fluid" id="login_container">
     <div class="contenu-entreprise">
       <img src="./Icone/Logo.png" alt="Logo S RAYs"><br>

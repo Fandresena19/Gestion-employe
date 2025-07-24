@@ -3,6 +3,32 @@ include('../other/head.php');
 
 $matricule_emp = $_SESSION['Matricule_emp'];
 
+// Vérifier si on est en mode modification
+$edit_mode = false;
+$edit_data = null;
+$edit_id = null;
+
+if (isset($_GET['edit']) && !empty($_GET['edit'])) {
+    $edit_id = intval($_GET['edit']);
+    $edit_mode = true;
+    
+    // Récupérer les données de la tâche à modifier
+    $sql_edit = "SELECT * FROM timesheet WHERE id_timesheet = :id AND matricule_emp = :matricule_emp";
+    $stmt_edit = $bdd->prepare($sql_edit);
+    $stmt_edit->execute([
+        'id' => $edit_id,
+        'matricule_emp' => $matricule_emp
+    ]);
+    $edit_data = $stmt_edit->fetch(PDO::FETCH_ASSOC);
+    
+    // Si la tâche n'existe pas ou n'appartient pas à l'utilisateur
+    if (!$edit_data) {
+        $_SESSION['error'] = "Tâche introuvable ou accès non autorisé.";
+        header('Location: ./mes_timesheet.php');
+        exit();
+    }
+}
+
 // Afficher le message de succès s'il existe
 if (isset($_SESSION['success'])) {
   echo '<div class="alert alert-success">' . $_SESSION['success'] . '</div>';
@@ -28,28 +54,36 @@ $heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <div class="annotation">
-  <h2>Ajouter une tâche</h2>
+  <h2><?php echo $edit_mode ? 'Modifier une tâche' : 'Ajouter une tâche'; ?></h2>
 </div>
 
 <div class="contenu">
   <header>
-    <h4>Ajout tâche</h4>
+    <h4><?php echo $edit_mode ? 'Modification tâche' : 'Ajout tâche'; ?></h4>
 
     <div class="bouton">
-      <a href="./mes_permission.php"><button>Retour</button></a>
+      <a href="./mes_timesheet.php"><button>Retour</button></a>
     </div>
   </header><br>
-  <form action="../traitement/ajout_tache.php" method="post">
+  
+  <form action="<?php echo $edit_mode ? '../traitement/modifier_tache.php' : '../traitement/ajout_tache.php'; ?>" method="post">
     <input type="hidden" name="matricule_emp" value="<?php echo $matricule_emp; ?>">
+    <?php if ($edit_mode): ?>
+        <input type="hidden" name="id_timesheet" value="<?php echo $edit_id; ?>">
+    <?php endif; ?>
 
     <div class="form-group">
       <label for="date_tache">Date de la tâche:</label>
-      <input type="date" id="date_tache" name="date_tache" class="form-control" value="<?php echo date('Y-m-d'); ?>" readonly>
+      <input type="date" id="date_tache" name="date_tache" class="form-control" 
+             value="<?php echo $edit_mode ? $edit_data['date_tache'] : date('Y-m-d'); ?>" 
+             <?php echo $edit_mode ? '' : 'readonly'; ?>>
     </div>
 
     <div class="form-group">
       <label for="tache">Tâche effectuée:</label>
-      <input type="text" id="tache" name="tache" class="form-control" placeholder="Nom de la tâche">
+      <input type="text" id="tache" name="tache" class="form-control" 
+             placeholder="Nom de la tâche" 
+             value="<?php echo $edit_mode ? htmlspecialchars($edit_data['tache']) : ''; ?>" required>
     </div>
 
     <div class="form-group">
@@ -58,11 +92,17 @@ $heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
         <select id="duree_select" class="form-control" onchange="handleHeureSelection()">
           <option value="">Selectionnez heure ou ajoutez-en</option>
           <?php foreach ($heures as $heure): ?>
-            <option value="<?php echo htmlspecialchars($heure['duree_tache']); ?>"><?php echo htmlspecialchars($heure['duree_tache']); ?> heures</option>
+            <option value="<?php echo htmlspecialchars($heure['duree_tache']); ?>"
+                    <?php echo ($edit_mode && $edit_data['duree_tache'] == $heure['duree_tache']) ? 'selected' : ''; ?>>
+              <?php echo htmlspecialchars($heure['duree_tache']); ?> heures
+            </option>
           <?php endforeach; ?>
           <option value="nouveau">+ Ajouter heures</option>
         </select>
-        <input type="number" id="duree" name="duree_tache" class="form-control" style="display:none;" placeholder="Ajouter heures" required value="1">
+        <input type="number" id="duree" name="duree_tache" class="form-control" 
+               style="<?php echo ($edit_mode && !in_array($edit_data['duree_tache'], array_column($heures, 'duree_tache'))) ? 'display:block;' : 'display:none;'; ?>" 
+               placeholder="Ajouter heures" required 
+               value="<?php echo $edit_mode ? $edit_data['duree_tache'] : '1'; ?>">
         <small>Entrez la durée en heures </small>
       </div>
     </div>
@@ -73,31 +113,46 @@ $heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
         <select id="client_select" class="form-control" onchange="handleClientSelection()">
           <option value="">Sélectionnez un client ou ajoutez-en un nouveau</option>
           <?php foreach ($clients as $client): ?>
-            <option value="<?php echo htmlspecialchars($client['client']); ?>"><?php echo htmlspecialchars($client['client']); ?></option>
+            <option value="<?php echo htmlspecialchars($client['client']); ?>"
+                    <?php echo ($edit_mode && $edit_data['client'] == $client['client']) ? 'selected' : ''; ?>>
+              <?php echo htmlspecialchars($client['client']); ?>
+            </option>
           <?php endforeach; ?>
           <option value="new">+ Ajouter un nouveau client</option>
         </select>
-        <input type="text" id="client" name="client" class="form-control" style="display:none;" placeholder="Nom du client">
+        <input type="text" id="client" name="client" class="form-control" 
+               style="<?php echo ($edit_mode && !in_array($edit_data['client'], array_column($clients, 'client'))) ? 'display:block;' : 'display:none;'; ?>" 
+               placeholder="Nom du client"
+               value="<?php echo $edit_mode ? htmlspecialchars($edit_data['client']) : ''; ?>">
       </div>
     </div>
 
     <div class="form-group">
       <label for="mission">Mission</label>
-      <input type="text" id="mission" name="mission" class="form-control" placeholder="Mission effectuée">
+      <input type="text" id="mission" name="mission" class="form-control" 
+             placeholder="Mission effectuée" 
+             value="<?php echo $edit_mode ? htmlspecialchars($edit_data['mission']) : ''; ?>" required>
     </div>
 
     <div class="form-group">
       <label for="description_tache">Description:</label>
-      <textarea id="description_tache" name="description_tache" class="form-control" rows="3" placeholder="Description détaillée de la tâche"></textarea>
+      <textarea id="description_tache" name="description_tache" class="form-control" rows="3" 
+                placeholder="Description détaillée de la tâche"><?php echo $edit_mode ? htmlspecialchars($edit_data['description_tache']) : ''; ?></textarea>
     </div>
 
     <div class="form-group">
       <label for="note">Note additionnelle:</label>
-      <textarea id="note" name="note" class="form-control" rows="2" placeholder="Notes additionnelles (optionnel)"></textarea>
+      <textarea id="note" name="note" class="form-control" rows="2" 
+                placeholder="Notes additionnelles (optionnel)"><?php echo $edit_mode ? htmlspecialchars($edit_data['note']) : ''; ?></textarea>
     </div>
 
     <div class="form-group">
-      <button type="submit" class="bouton_confirmer">Ajouter</button>
+      <button type="submit" class="bouton_confirmer">
+        <?php echo $edit_mode ? 'Modifier' : 'Ajouter'; ?>
+      </button><br>
+      <?php if ($edit_mode): ?>
+        <a href="./mes_timesheet.php" class="bouton_annuler">Annuler</a>
+      <?php endif; ?>
     </div>
   </form>
 </div>
@@ -118,11 +173,6 @@ $heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
     }
   }
 
-  // Initialiser l'état du champ client
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('client').value = document.getElementById('client_select').value;
-  });
-
   function handleHeureSelection() {
     var select = document.getElementById('duree_select');
     var input = document.getElementById('duree');
@@ -137,6 +187,35 @@ $heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
       input.required = false;
     }
   }
+
+  // Initialiser l'état des champs au chargement de la page
+  document.addEventListener('DOMContentLoaded', function() {
+    // Initialiser le champ client
+    var clientSelect = document.getElementById('client_select');
+    var clientInput = document.getElementById('client');
+    
+    if (clientSelect.value && clientSelect.value !== 'new') {
+      clientInput.value = clientSelect.value;
+      clientInput.style.display = 'none';
+    } else if (clientInput.value && clientSelect.value === '') {
+      // Si on a une valeur dans l'input mais pas dans le select (client personnalisé)
+      clientSelect.value = 'new';
+      clientInput.style.display = 'block';
+    }
+
+    // Initialiser le champ durée
+    var dureeSelect = document.getElementById('duree_select');
+    var dureeInput = document.getElementById('duree');
+    
+    if (dureeSelect.value && dureeSelect.value !== 'nouveau') {
+      dureeInput.value = dureeSelect.value;
+      dureeInput.style.display = 'none';
+    } else if (dureeInput.value && dureeSelect.value === '') {
+      // Si on a une valeur dans l'input mais pas dans le select (durée personnalisée)
+      dureeSelect.value = 'nouveau';
+      dureeInput.style.display = 'block';
+    }
+  });
 </script>
 
 <style>
@@ -191,6 +270,29 @@ $heures = $stmt_heure->fetchAll(PDO::FETCH_ASSOC);
   small {
     color: #aaa;
     font-size: 0.8em;
+  }
+
+  .bouton_annuler {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    padding: 10px 20px;
+    background-color: #d9534f;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    margin: auto;
+    transition: background-color 0.3s ease;
+  }
+
+  .bouton_annuler:hover {
+    background-color: #c9302c;
+    text-decoration: none;
+    color: white;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
   }
 </style>
 

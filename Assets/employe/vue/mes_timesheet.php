@@ -121,8 +121,10 @@ $total_heures = $stats['total_heures'] ?: 0;
       <th>Tâche</th>
       <th>Durée (heures)</th>
       <th>Client</th>
+      <th>Mission</th>
       <th>Description</th>
       <th>Note</th>
+      <th>Actions</th>
     </thead>
     <tbody>
       <?php
@@ -144,16 +146,23 @@ $total_heures = $stats['total_heures'] ?: 0;
         echo '<td>' . $row['matricule_emp'] . '</td>';
         echo '<td>' . $row['nom_emp'] . ' ' . $row['prenom_emp'] . '</td>';
         echo '<td>' . date('d/m/Y', strtotime($row['date_tache'])) . '</td>';
-        echo '<td>' . $row['tache'] . '</td>';
+        echo '<td>' . htmlspecialchars($row['tache']) . '</td>';
         echo '<td>' . $row['duree_tache'] . '</td>';
-        echo '<td>' . $row['client'] . '</td>';
-        echo '<td>' . $row['description_tache'] . '</td>';
-        echo '<td>' . $row['note'] . '</td>';
+        echo '<td>' . htmlspecialchars($row['client']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['mission']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['description_tache']) . '</td>';
+        echo '<td>' . htmlspecialchars($row['note']) . '</td>';
+
+        echo '<td class="actions-cell">';
+        echo '<a href="./timesheet.php?edit=' . $row['id_timesheet'] . '" class="btn-modifier" title="Modifier cette tâche">';
+        echo '<i class="bx bx-edit"></i>';
+        echo '</a>';
+        echo '</td>';
         echo '</tr>';
       }
 
       if (!$has_rows) {
-        echo '<tr><td colspan="9" class="text-center">Aucune tâche trouvée pour cette période</td></tr>';
+        echo '<tr><td colspan="11" class="text-center">Aucune tâche trouvée pour cette période</td></tr>';
       }
       ?>
     </tbody>
@@ -236,6 +245,50 @@ $total_heures = $stats['total_heures'] ?: 0;
     color: white;
     border: none;
     cursor: pointer;
+  }
+
+  /* Styles pour les actions */
+  .actions-cell {
+    text-align: center;
+    padding: 8px;
+  }
+
+  .btn-modifier {
+    display: inline-block;
+    padding: 6px 12px;
+    color: orange !important;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-modifier:hover {
+    text-decoration: none;
+  }
+
+  .btn-modifier i {
+    margin-right: 4px;
+    color: orange !important;
+  }
+
+  /* Responsive design pour le tableau */
+  @media (max-width: 768px) {
+    .table_conge {
+      font-size: 12px;
+    }
+    
+    .btn-modifier {
+      padding: 4px 8px;
+      font-size: 10px;
+    }
+  }
+
+  /* Ajout d'une largeur fixe pour la colonne actions */
+  .table_conge th:last-child,
+  .table_conge td:last-child {
+    width: 100px;
+    min-width: 100px;
   }
 </style>
 

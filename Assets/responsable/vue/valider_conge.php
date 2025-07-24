@@ -62,6 +62,7 @@
 
             if ($stmt_notif->rowCount() > 0) {
                 echo "Notification ajoutée";
+                
                 require_once('../traitement/sendMail.php');
                 $sql_mes = "SELECT c.date_debut, c.date_fin, n.Type, n.Message, e.mail_emp
                 FROM conge c JOIN employer_login e ON e.Matricule_emp = c.Matricule_emp
