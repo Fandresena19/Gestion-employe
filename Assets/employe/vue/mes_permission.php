@@ -53,8 +53,8 @@ if ($filter == 'current_month') {
   $period_text = "du " . date('d/m/Y', strtotime($custom_start)) . " au " . date('d/m/Y', strtotime($custom_end));
 }
 
-// Quota annuel de permission (à récupérer depuis la base de données si nécessaire)
-$quotaPermissionAnnuel = 10; // Quota fixé à 10 jours (exemple)
+// Quota annuel de permission 
+$quotaPermissionAnnuel = 10; // Quota fixé à 10 jours
 
 // Récupérer toutes les permissions validées de l'employé pour l'année en cours
 $sql_validees = "SELECT * FROM permission
