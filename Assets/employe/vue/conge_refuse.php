@@ -34,7 +34,6 @@ $stmt->execute(['matricule_emp' => $matricule_emp]);
 
       while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
 
-
         echo '
               
               <tr>
