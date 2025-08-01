@@ -259,6 +259,11 @@ if ($filtreEmploye !== 'tous') {
     width: 100%;
   }
 
+  .download-buttons {
+    display: flex;
+    gap: 10px;
+  }
+
   .tache-detail {
     margin-bottom: 5px;
   }
@@ -279,8 +284,13 @@ if ($filtreEmploye !== 'tous') {
   <header>
     <div class="header-actions">
       <div><h4>Détails des Tâches</h4></div>
-      <div class="bouton">
-        <a href="../traitement/download.php"><button>Télécharger le pdf</button></a>
+      <div class="download-buttons bouton">
+        <a href="../traitement/download_excel.php?mois=<?php echo $moisActuel; ?>&annee=<?php echo $anneeActuelle; ?>&employe=<?php echo urlencode($filtreEmploye); ?>">
+          <button>Télécharger Excel</button>
+        </a>
+        <a href="../traitement/download.php">
+          <button>Télécharger le pdf</button>
+        </a>
       </div>
     </div>
   </header> <br />

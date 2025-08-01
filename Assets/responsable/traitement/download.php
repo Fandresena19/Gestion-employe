@@ -27,7 +27,7 @@ class PDF extends FPDF {
     }
     
     function Header() {
-        // Ajouter l'image/logo si elle existe
+        // Ajouter l'image/logo 
         $logoPath = '../../Icone/Logo.png'; // Chemin vers votre logo
         if (file_exists($logoPath)) {
             // Logo à gauche (X=10, Y=6, largeur=30)
