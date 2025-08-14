@@ -444,3 +444,4 @@ $notif_count = $stmt_notif->fetch(PDO::FETCH_ASSOC)['unread_count'];
           });
         });
       </script>
+      
