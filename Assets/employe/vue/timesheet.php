@@ -199,7 +199,7 @@ $missions_predefinies = [
     <div class="form-group">
       <label for="client">Client:</label>
       <div class="client-input-container">
-        <select id="client_select" class="form-control" onchange="handleClientSelection()">
+        <select id="client_select" class="form-control" onchange="handleClientSelection()"> s
           <option value="">Sélectionnez un client ou ajoutez-en un nouveau</option>
           <?php foreach ($clients as $client): ?>
             <option value="<?php echo htmlspecialchars($client['client']); ?>"
