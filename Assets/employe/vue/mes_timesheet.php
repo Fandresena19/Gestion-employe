@@ -83,6 +83,7 @@ $total_heures = $stats['total_heures'] ?: 0;
       <strong>Heures de travail</strong>
       <p><?php echo $total_heures; ?> heures</p>
     </div>
+    
     <div class="permission-item remaining">
       <strong>Nombre de tâches</strong>
       <p><?php echo $nb_taches; ?> tâches</p>
